@@ -20,6 +20,7 @@ import Blocked from "@/pages/blocked";
 import GoogleAuthCallback from "@/pages/auth-callback-google";
 import LinkedInAuthCallback from "@/pages/auth-callback-linkedin";
 import QuickTips from "@/pages/quick-tips";
+import QuickTipsOld from "@/pages/quick-tips-old";
 import ApplyInternship from "@/pages/apply-internship";
 import ApplySuccess from "@/pages/apply-success";
 import NotFound from "@/pages/not-found";
@@ -35,53 +36,63 @@ function Router() {
       <Route path="/apply-internship/:jobId" component={ApplyInternship} />
       <Route path="/apply-internship" component={ApplyInternship} />
       <Route path="/apply-success" component={ApplySuccess} />
-      
+
       {/* OAuth callback routes */}
       <Route path="/auth/google/callback" component={GoogleAuthCallback} />
       <Route path="/auth/linkedin/callback" component={LinkedInAuthCallback} />
-      
+
       {/* Auth flow routes */}
       <Route path="/register" component={Register} />
       <Route path="/pending" component={Pending} />
       <Route path="/blocked" component={Blocked} />
-      
+
       {/* Protected routes */}
       <Route path="/student-portal">
         <ProtectedRoute requireStatus="joined">
           <StudentPortal />
         </ProtectedRoute>
       </Route>
-      
+
       <Route path="/resources">
         <ProtectedRoute requireStatus="joined">
           <Resources />
         </ProtectedRoute>
       </Route>
-      
+
       <Route path="/events">
         <ProtectedRoute requireStatus="joined">
           <Events />
         </ProtectedRoute>
       </Route>
-      
+
       <Route path="/members">
         <ProtectedRoute requireStatus="joined">
           <Members />
         </ProtectedRoute>
       </Route>
-      
+
+      {/* Quick Tips - Standalone mockup route (for development/preview) */}
+      <Route path="/video" component={VideoPlayer} />
+
+      {/* Quick Tips - Standalone mockup route (for development/preview) */}
+      <Route path="/quick-tips-old" component={QuickTipsOld} />
+
+
       <Route path="/video/:id">
         <ProtectedRoute>
           <VideoPlayer />
         </ProtectedRoute>
       </Route>
-      
+
+      {/* Quick Tips - Standalone mockup route (for development/preview) */}
+      <Route path="/quick-tips" component={QuickTips} />`r`n      \u003cRoute path=\"/quick-tips-old\" component={QuickTipsOld} /\u003e
+
       <Route path="/quick-tips/:id">
         <ProtectedRoute>
           <QuickTips />
         </ProtectedRoute>
       </Route>
-      
+
       <Route component={NotFound} />
     </Switch>
   );
