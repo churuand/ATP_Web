@@ -4,9 +4,11 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: "Nunito", sans-serif;
-  --font-serif: "Nunito", serif;
-  
+  /* --font-sans: "Nunito", sans-serif;
+  --font-serif: "Nunito", serif; */
+  --font-sans: "DM Sans", "Inter", sans-serif;
+  --font-serif: "Playfair Display", serif;
+
   --radius-sm: 0.5rem;
   --radius-md: 0.75rem;
   --radius-lg: 1rem;
@@ -24,11 +26,12 @@
   --color-popover-foreground: hsl(356 40% 10%);
 
   /* Professional Red Palette */
-  --color-primary: hsl(356 85% 42%); /* Deep Corporate Red */
+  --color-primary: hsl(356 85% 42%);
+  /* Deep Corporate Red */
   --color-primary-foreground: hsl(0 0% 100%);
 
   /* Tweaked Secondary for better visual separation from white */
-  --color-secondary: hsl(356 20% 93%); 
+  --color-secondary: hsl(356 20% 93%);
   --color-secondary-foreground: hsl(356 85% 32%);
 
   --color-muted: hsl(356 10% 94%);
@@ -55,10 +58,17 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply font-sans antialiased bg-background text-foreground;
   }
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-serif font-medium tracking-tight;
   }
 }
@@ -68,6 +78,7 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }

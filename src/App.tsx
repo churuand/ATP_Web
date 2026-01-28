@@ -23,13 +23,28 @@ import QuickTips from "@/pages/quick-tips";
 import QuickTipsOld from "@/pages/quick-tips-old";
 import ApplyInternship from "@/pages/apply-internship";
 import ApplySuccess from "@/pages/apply-success";
+import ContactUs from "@/pages/contact-us";
+import JobSearch from "@/pages/job-search";
+import Partners from "@/pages/partners";
+import SuccessStories from "@/pages/success-stories";
+import DataCAP from "@/pages/datacap";
 import NotFound from "@/pages/not-found";
+import StudentsGraduates from "@/pages/students-graduates";
+import AboutUs from "@/pages/about-us";
 
 function Router() {
   return (
     <Switch>
       {/* Public routes */}
       <Route path="/" component={Home} />
+      <Route path="/job-search" component={JobSearch} />
+      <Route path="/students-graduates" component={StudentsGraduates} />
+      <Route path="/about-us" component={AboutUs} />
+      <Route path="/contact-us" component={ContactUs} />
+      <Route path="/partners" component={Partners} />
+      <Route path="/success-stories" component={SuccessStories} />
+      <Route path="/recruitment" component={SuccessStories} />
+      <Route path="/datacap" component={DataCAP} />
       <Route path="/login" component={Login} />
       <Route path="/programs" component={Programs} />
       <Route path="/intern-jobs" component={InternJobs} />
@@ -85,7 +100,7 @@ function Router() {
       </Route>
 
       {/* Quick Tips - Standalone mockup route (for development/preview) */}
-      <Route path="/quick-tips" component={QuickTips} />`r`n      \u003cRoute path=\"/quick-tips-old\" component={QuickTipsOld} /\u003e
+      <Route path="/quick-tips" component={QuickTips} />
 
       <Route path="/quick-tips/:id">
         <ProtectedRoute>
