@@ -182,11 +182,10 @@ const upload_cv = () => {
                                         setContactValue("");
                                         setError("");
                                     }}
-                                    className={`flex items-center gap-2 rounded-full border px-4 py-2 transition ${
-                                        contactMethod === "facebook"
+                                    className={`flex items-center gap-2 rounded-full border px-4 py-2 transition ${contactMethod === "facebook"
                                             ? "border-primary bg-primary/20 text-primary"
                                             : "border-gray-200 text-muted-foreground"
-                                    }`}
+                                        }`}
                                 >
                                     <input
                                         type="checkbox"
@@ -203,11 +202,10 @@ const upload_cv = () => {
                                         setContactValue("");
                                         setError("");
                                     }}
-                                    className={`flex items-center gap-2 rounded-full border px-4 py-2 transition ${
-                                        contactMethod === "whatsapp"
+                                    className={`flex items-center gap-2 rounded-full border px-4 py-2 transition ${contactMethod === "whatsapp"
                                             ? "border-primary bg-primary/20 text-primary"
                                             : "border-gray-200 text-muted-foreground"
-                                    }`}
+                                        }`}
                                 >
                                     <input
                                         type="checkbox"

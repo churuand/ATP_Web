@@ -873,7 +873,7 @@ export default function JobSearch() {
                     <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
                         Submit your CV and we'll contact you when a suitable role becomes available.
                     </p>
-                    <Link href="/apply-internship">
+                    <Link href="/upload-cv">
                         <Button className="rounded-full bg-white text-primary hover:bg-white/90 px-8 py-6 text-lg font-medium shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all">
                             Submit Your CV
                             <ArrowRight className="w-5 h-5 ml-2" />
