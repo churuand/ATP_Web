@@ -90,7 +90,7 @@ export default function Home() {
               </div>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-6">
+              {/* <div className="flex flex-col sm:flex-row gap-4 pt-6">
                 <Link href="/students-graduates">
                   <Button className="rounded-full bg-primary text-white hover:bg-primary/90 px-8 py-6 text-lg font-medium shadow-lg shadow-primary/20 hover:shadow-xl hover:-translate-y-0.5 transition-all w-full sm:w-auto">
                     Apply now!
@@ -107,6 +107,45 @@ export default function Home() {
                 >
                   Learn more
                 </Button>
+              </div>
+            </motion.div> */}
+              {/* CTA Buttons */}
+              <div className="pt-6 space-y-4">
+
+                {/* Top row */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-left">
+                  <Link href="/students-graduates">
+                    <Button className="rounded-full bg-primary text-white hover:bg-primary/90 px-8 py-6 text-lg font-medium shadow-lg shadow-primary/20 hover:shadow-xl hover:-translate-y-0.5 transition-all w-full sm:w-auto">
+                      Apply now!
+                    </Button>
+                  </Link>
+
+                  <Button
+                    variant="outline"
+                    className="rounded-full border-primary/20 text-primary hover:bg-primary/5 px-8 py-6 text-lg font-medium hover:-translate-y-0.5 transition-all w-full sm:w-auto"
+                    onClick={() => {
+                      const nextSection =
+                        document.getElementById("welcome-section");
+                      nextSection?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                  >
+                    Learn more
+                  </Button>
+                </div>
+
+                {/* Bottom button */}
+                <div className="flex justify-left">
+                  <Link href="/job-search">
+                    <Button
+                      variant="outline"
+                      className="rounded-full border-primary/20 text-primary hover:bg-primary/5 px-10 py-5 text-base font-semibold hover:-translate-y-0.5 transition-all w-full sm:w-auto flex items-center gap-2"
+                    >
+                      Explore Internship Jobs
+                      <ArrowRight className="w-4 h-4" />
+                    </Button>
+                  </Link>
+                </div>
+
               </div>
             </motion.div>
 
