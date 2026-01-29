@@ -1,4 +1,4 @@
-﻿import { Link } from "wouter";
+import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowDown, CheckCircle2, Calendar, UserCheck, Briefcase, GraduationCap, MapPin, Clock, HelpCircle, MessageCircle, Lock } from "lucide-react";

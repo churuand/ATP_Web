@@ -1,9 +1,9 @@
 import { useLocation, useRoute } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { 
-  Search, 
-  Bell, 
+import {
+  Search,
+  Bell,
   ThumbsUp,
   ThumbsDown,
   Share2,
@@ -26,7 +26,7 @@ import masterclass1 from "@assets/generated_images/interview_masterclass_thumbna
 import masterclass2 from "@assets/generated_images/resume_workshop_thumbnail.png";
 import short1 from "@assets/generated_images/quick_career_tip_vertical.png";
 import short2 from "@assets/generated_images/networking_tip_vertical.png";
-import studentPortrait from "@assets/generated_images/friendly_female_student_portrait.png"; 
+import studentPortrait from "@assets/generated_images/friendly_female_student_portrait.png";
 
 // Helper function to extract ID from slug-id format (e.g., "demo-slug-5" -> 5)
 const extractIdFromSlug = (slugId: string | undefined): number | null => {
@@ -126,29 +126,29 @@ export default function VideoPlayer() {
           <div className="flex items-center gap-4 flex-1 max-w-2xl mx-auto">
             <div className="relative w-full">
               <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-              <Input 
-                placeholder="Search" 
+              <Input
+                placeholder="Search"
                 className="pl-10 bg-secondary/30 border-transparent focus:bg-white transition-all rounded-full h-10"
               />
             </div>
             <Button size="icon" variant="ghost" className="rounded-full bg-secondary/30">
-                <Search className="w-4 h-4" />
+              <Search className="w-4 h-4" />
             </Button>
           </div>
 
           <div className="flex items-center gap-4 pl-4">
-             <Button variant="ghost" size="icon" className="rounded-full">
-                <Bell className="w-5 h-5 text-gray-600" />
-             </Button>
-             <div className="w-8 h-8 rounded-full overflow-hidden border border-gray-200">
-                <img src={studentPortrait} alt="Profile" className="w-full h-full object-cover" />
-             </div>
+            <Button variant="ghost" size="icon" className="rounded-full">
+              <Bell className="w-5 h-5 text-gray-600" />
+            </Button>
+            <div className="w-8 h-8 rounded-full overflow-hidden border border-gray-200">
+              <img src={studentPortrait} alt="Profile" className="w-full h-full object-cover" />
+            </div>
           </div>
         </header>
 
         <div className="flex-1 overflow-y-auto">
           <div className="max-w-[1800px] mx-auto p-4 lg:p-6 grid lg:grid-cols-[1fr_350px] xl:grid-cols-[1fr_400px] gap-6">
-            
+
             {/* Left Column: Video Player & Info */}
             <div className="min-w-0">
               {/* Video Player */}
@@ -167,17 +167,17 @@ export default function VideoPlayer() {
                     <>
                       <img src={currentVideo.thumbnail_url || masterclass1} alt={currentVideo.title} className="w-full h-full object-cover opacity-80" />
                       <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center cursor-pointer group-hover:scale-110 transition-transform">
-                              <Play className="w-8 h-8 text-white fill-current ml-1" />
-                          </div>
+                        <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center cursor-pointer group-hover:scale-110 transition-transform">
+                          <Play className="w-8 h-8 text-white fill-current ml-1" />
+                        </div>
                       </div>
                       {/* Fake Controls */}
                       <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black/80 to-transparent flex items-end px-4 pb-3 gap-4">
-                          <Play className="w-5 h-5 text-white fill-current" />
-                          <div className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden">
-                              <div className="w-1/3 h-full bg-primary"></div>
-                          </div>
-                          <span className="text-white text-xs">14:20 / {currentVideo.duration ? `${Math.floor(currentVideo.duration / 60)}:${(currentVideo.duration % 60).toString().padStart(2, '0')}` : '45:00'}</span>
+                        <Play className="w-5 h-5 text-white fill-current" />
+                        <div className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden">
+                          <div className="w-1/3 h-full bg-primary"></div>
+                        </div>
+                        <span className="text-white text-xs">14:20 / {currentVideo.duration ? `${Math.floor(currentVideo.duration / 60)}:${(currentVideo.duration % 60).toString().padStart(2, '0')}` : '45:00'}</span>
                       </div>
                     </>
                   )
@@ -194,7 +194,7 @@ export default function VideoPlayer() {
                         <p className="text-white/80 max-w-sm">
                           Unlock this masterclass for {currentVideo.price_credit} credits
                         </p>
-                        <Button 
+                        <Button
                           onClick={() => setShowPurchaseDialog(true)}
                           className="bg-white text-primary hover:bg-gray-100 font-bold"
                         >
@@ -210,22 +210,22 @@ export default function VideoPlayer() {
               {/* Video Info */}
               <div className="mt-4">
                 <h1 className="text-xl lg:text-2xl font-bold text-gray-900 line-clamp-2">{currentVideo.title}</h1>
-                
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-3">
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-primary font-bold overflow-hidden">
-                            {/* Placeholder avatar */}
-                            <div className="w-full h-full bg-primary/10 flex items-center justify-center text-primary text-xs font-bold">
-                                {currentVideo.mentor ? currentVideo.mentor[0] : 'M'}
-                            </div>
-                        </div>
-                        <div>
-                            <div className="font-bold text-gray-900 text-sm">{currentVideo.mentor || 'ATP Mentor'}</div>
-                            <div className="text-xs text-gray-500">{currentVideo.category?.name || 'Career Coach'}</div>
-                        </div>
-                    </div>
 
-                    {/* <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-primary font-bold overflow-hidden">
+                      {/* Placeholder avatar */}
+                      <div className="w-full h-full bg-primary/10 flex items-center justify-center text-primary text-xs font-bold">
+                        {currentVideo.mentor ? currentVideo.mentor[0] : 'M'}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-bold text-gray-900 text-sm">{currentVideo.mentor || 'ATP Mentor'}</div>
+                      <div className="text-xs text-gray-500">{currentVideo.category?.name || 'Career Coach'}</div>
+                    </div>
+                  </div>
+
+                  {/* <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0">
                         <div className="flex items-center bg-gray-100 rounded-full h-9">
                             <Button variant="ghost" className="rounded-l-full h-full px-4 hover:bg-gray-200 border-r border-gray-300 gap-2 text-gray-700">
                                 <ThumbsUp className="w-4 h-4" /> 2.4k
@@ -242,22 +242,22 @@ export default function VideoPlayer() {
 
                 {/* Description Box */}
                 <div className="mt-4 bg-secondary/30 rounded-xl p-4 text-sm hover:bg-secondary/50 transition-colors cursor-pointer">
-                    <div className="font-bold text-gray-900 mb-2">
-                      {currentVideo.category?.name || 'Career Development'} • {new Date(currentVideo.created_at).toLocaleDateString()}
+                  <div className="font-bold text-gray-900 mb-2">
+                    {currentVideo.category?.name || 'Career Development'} • {new Date(currentVideo.created_at).toLocaleDateString()}
+                  </div>
+                  <p className="text-gray-700 leading-relaxed">
+                    {currentVideo.description || 'Watch this masterclass to enhance your career development skills.'}
+                    {/* <span className="font-bold text-gray-900 block mt-1">...more</span> */}
+                  </p>
+                  {currentVideo.tags && currentVideo.tags.length > 0 && (
+                    <div className="flex gap-2 mt-3 flex-wrap">
+                      {currentVideo.tags.map((tag) => (
+                        <span key={tag.id} className="px-2 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium">
+                          #{tag.name}
+                        </span>
+                      ))}
                     </div>
-                    <p className="text-gray-700 leading-relaxed">
-                        {currentVideo.description || 'Watch this masterclass to enhance your career development skills.'}
-                        {/* <span className="font-bold text-gray-900 block mt-1">...more</span> */}
-                    </p>
-                    {currentVideo.tags && currentVideo.tags.length > 0 && (
-                      <div className="flex gap-2 mt-3 flex-wrap">
-                        {currentVideo.tags.map((tag) => (
-                          <span key={tag.id} className="px-2 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium">
-                            #{tag.name}
-                          </span>
-                        ))}
-                      </div>
-                    )}
+                  )}
                 </div>
 
                 {/* Comments Section Placeholder */}
@@ -275,81 +275,81 @@ export default function VideoPlayer() {
 
             {/* Right Column: Recommended & Shorts */}
             <div className="space-y-6">
-                
-                {/* Filter Chips */}
-                {/* <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+
+              {/* Filter Chips */}
+              {/* <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
                     <Button size="sm" className="rounded-lg bg-black text-white hover:bg-gray-800 text-xs h-8">All</Button>
                     <Button size="sm" variant="secondary" className="rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 text-xs h-8">From Sarah Jenkins</Button>
                     <Button size="sm" variant="secondary" className="rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 text-xs h-8">Related</Button>
                 </div> */}
 
-                {/* Up Next List (Mixed with Shorts) */}
-                <div className="flex flex-col gap-4">
-                    {recommendedVideos.slice(0, 1).map((video: Video) => (
-                         <div 
-                           key={video.id} 
-                           className="flex gap-3 cursor-pointer group"
-                           onClick={() => setLocation(createVideoUrl(video))}
-                         >
-                            <div className="relative w-40 aspect-video rounded-xl overflow-hidden shrink-0">
-                                <img src={video.thumbnail_url || masterclass1} alt={video.title} className="w-full h-full object-cover group-hover:opacity-90" />
-                                <span className="absolute bottom-1 right-1 bg-black/80 text-white text-[10px] px-1 rounded font-medium">
-                                  {video.duration ? `${Math.floor(video.duration / 60)}:${(video.duration % 60).toString().padStart(2, '0')}` : 'N/A'}
-                                </span>
-                            </div>
-                            <div className="flex flex-col gap-1 min-w-0">
-                                <h4 className="font-bold text-sm text-gray-900 line-clamp-2 group-hover:text-primary leading-tight">{video.title}</h4>
-                                <div className="text-xs text-gray-500">{video.mentor || 'ATP Mentor'}</div>
-                                <div className="text-xs text-gray-500">{video.category?.name || 'Career Development'}</div>
-                            </div>
-                        </div>
-                    ))}
-
-                    {/* Shorts Shelf */}
-                    <div>
-                        <div className="flex items-center gap-2 mb-3">
-                            <div className="w-6 h-6 bg-red-600 rounded-lg flex items-center justify-center">
-                                <Play className="w-3 h-3 text-white fill-current" />
-                            </div>
-                            <span className="font-bold text-gray-900 text-sm">Shorts</span>
-                        </div>
-                        <div className="grid grid-cols-2 gap-3">
-                            {shorts.slice(0, 2).map((short) => (
-                                <div key={short.id} className="aspect-[9/16] rounded-xl overflow-hidden relative group cursor-pointer">
-                                    <img src={short.image} alt={short.title} className="w-full h-full object-cover" />
-                                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60" />
-                                    <div className="absolute bottom-2 left-2 right-2">
-                                        <h4 className="text-white text-xs font-bold line-clamp-2 mb-1 shadow-black drop-shadow-md">{short.title}</h4>
-                                        <span className="text-white/80 text-[10px] shadow-black drop-shadow-md">{short.views} views</span>
-                                    </div>
-                                    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <MoreHorizontal className="text-white w-4 h-4 drop-shadow-md" />
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+              {/* Up Next List (Mixed with Shorts) */}
+              <div className="flex flex-col gap-4">
+                {recommendedVideos.slice(0, 1).map((video: Video) => (
+                  <div
+                    key={video.id}
+                    className="flex gap-3 cursor-pointer group"
+                    onClick={() => setLocation(createVideoUrl(video))}
+                  >
+                    <div className="relative w-40 aspect-video rounded-xl overflow-hidden shrink-0">
+                      <img src={video.thumbnail_url || masterclass1} alt={video.title} className="w-full h-full object-cover group-hover:opacity-90" />
+                      <span className="absolute bottom-1 right-1 bg-black/80 text-white text-[10px] px-1 rounded font-medium">
+                        {video.duration ? `${Math.floor(video.duration / 60)}:${(video.duration % 60).toString().padStart(2, '0')}` : 'N/A'}
+                      </span>
                     </div>
+                    <div className="flex flex-col gap-1 min-w-0">
+                      <h4 className="font-bold text-sm text-gray-900 line-clamp-2 group-hover:text-primary leading-tight">{video.title}</h4>
+                      <div className="text-xs text-gray-500">{video.mentor || 'ATP Mentor'}</div>
+                      <div className="text-xs text-gray-500">{video.category?.name || 'Career Development'}</div>
+                    </div>
+                  </div>
+                ))}
 
-                    {recommendedVideos.slice(1).map((video: Video) => (
-                         <div 
-                           key={video.id} 
-                           className="flex gap-3 cursor-pointer group"
-                           onClick={() => setLocation(createVideoUrl(video))}
-                         >
-                            <div className="relative w-40 aspect-video rounded-xl overflow-hidden shrink-0">
-                                <img src={video.thumbnail_url || masterclass1} alt={video.title} className="w-full h-full object-cover group-hover:opacity-90" />
-                                <span className="absolute bottom-1 right-1 bg-black/80 text-white text-[10px] px-1 rounded font-medium">
-                                  {video.duration ? `${Math.floor(video.duration / 60)}:${(video.duration % 60).toString().padStart(2, '0')}` : 'N/A'}
-                                </span>
-                            </div>
-                            <div className="flex flex-col gap-1 min-w-0">
-                                <h4 className="font-bold text-sm text-gray-900 line-clamp-2 group-hover:text-primary leading-tight">{video.title}</h4>
-                                <div className="text-xs text-gray-500">{video.mentor || 'ATP Mentor'}</div>
-                                <div className="text-xs text-gray-500">{video.category?.name || 'Career Development'}</div>
-                            </div>
+                {/* Shorts Shelf */}
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-6 h-6 bg-red-600 rounded-lg flex items-center justify-center">
+                      <Play className="w-3 h-3 text-white fill-current" />
+                    </div>
+                    <span className="font-bold text-gray-900 text-sm">Shorts</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    {shorts.slice(0, 2).map((short) => (
+                      <div key={short.id} className="aspect-[9/16] rounded-xl overflow-hidden relative group cursor-pointer">
+                        <img src={short.image} alt={short.title} className="w-full h-full object-cover" />
+                        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60" />
+                        <div className="absolute bottom-2 left-2 right-2">
+                          <h4 className="text-white text-xs font-bold line-clamp-2 mb-1 shadow-black drop-shadow-md">{short.title}</h4>
+                          <span className="text-white/80 text-[10px] shadow-black drop-shadow-md">{short.views} views</span>
                         </div>
+                        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <MoreHorizontal className="text-white w-4 h-4 drop-shadow-md" />
+                        </div>
+                      </div>
                     ))}
+                  </div>
                 </div>
+
+                {recommendedVideos.slice(1).map((video: Video) => (
+                  <div
+                    key={video.id}
+                    className="flex gap-3 cursor-pointer group"
+                    onClick={() => setLocation(createVideoUrl(video))}
+                  >
+                    <div className="relative w-40 aspect-video rounded-xl overflow-hidden shrink-0">
+                      <img src={video.thumbnail_url || masterclass1} alt={video.title} className="w-full h-full object-cover group-hover:opacity-90" />
+                      <span className="absolute bottom-1 right-1 bg-black/80 text-white text-[10px] px-1 rounded font-medium">
+                        {video.duration ? `${Math.floor(video.duration / 60)}:${(video.duration % 60).toString().padStart(2, '0')}` : 'N/A'}
+                      </span>
+                    </div>
+                    <div className="flex flex-col gap-1 min-w-0">
+                      <h4 className="font-bold text-sm text-gray-900 line-clamp-2 group-hover:text-primary leading-tight">{video.title}</h4>
+                      <div className="text-xs text-gray-500">{video.mentor || 'ATP Mentor'}</div>
+                      <div className="text-xs text-gray-500">{video.category?.name || 'Career Development'}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

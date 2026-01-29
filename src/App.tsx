@@ -7,6 +7,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Home from "@/pages/home";
 import Programs from "@/pages/programs";
+import InternshipProgram from "@/pages/internship-program";
 import InternJobs from "@/pages/intern-jobs";
 import StudentPortal from "@/pages/student-portal";
 import Resources from "@/pages/resources";
@@ -27,6 +28,7 @@ import ContactUs from "@/pages/contact-us";
 import JobSearch from "@/pages/job-search";
 import Partners from "@/pages/partners";
 import SuccessStories from "@/pages/success-stories";
+import UploadCV from "@/pages/upload-cv";
 import DataCAP from "@/pages/datacap";
 import NotFound from "@/pages/not-found";
 import StudentsGraduates from "@/pages/students-graduates";
@@ -38,6 +40,7 @@ function Router() {
       {/* Public routes */}
       <Route path="/" component={Home} />
       <Route path="/job-search" component={JobSearch} />
+      <Route path="/internship-program" component={InternshipProgram} />
       <Route path="/students-graduates" component={StudentsGraduates} />
       <Route path="/about-us" component={AboutUs} />
       <Route path="/contact-us" component={ContactUs} />
@@ -51,6 +54,7 @@ function Router() {
       <Route path="/apply-internship/:jobId" component={ApplyInternship} />
       <Route path="/apply-internship" component={ApplyInternship} />
       <Route path="/apply-success" component={ApplySuccess} />
+      <Route path="/upload-cv" component={UploadCV} />
 
       {/* OAuth callback routes */}
       <Route path="/auth/google/callback" component={GoogleAuthCallback} />
