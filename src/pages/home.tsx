@@ -333,7 +333,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
             <div className="bg-gray-50 rounded-2xl p-8 flex flex-col items-center text-center hover:bg-white hover:shadow-lg transition-all border border-transparent hover:border-gray-100 group">
               <div className="text-4xl font-serif font-bold text-primary mb-3 group-hover:scale-110 transition-transform">
-                1,000+
+                10,000+
               </div>
               <div className="text-sm font-bold text-gray-500">
                 Internship placements completed

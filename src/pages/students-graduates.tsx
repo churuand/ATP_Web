@@ -54,6 +54,46 @@ export default function StudentsGraduates() {
             <section className="py-24 bg-white">
                 <div className="container mx-auto px-4">
                     <div className="grid lg:grid-cols-3 gap-8 items-stretch">
+                        {/* Card 3: Intern Jobs */}
+                        <Link href="/internship-program" className="h-full">
+                            <motion.div
+                                whileHover={{ y: -10 }}
+                                className="bg-white rounded-[2rem] p-10 flex flex-col h-full shadow-2xl border border-primary/5 relative overflow-hidden group cursor-pointer"
+                            >
+                                <div className="absolute -right-12 -top-12 w-40 h-40 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-all duration-500" />
+
+                                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-8 text-primary">
+                                    <Briefcase className="w-8 h-8" />
+                                </div>
+
+                                <h3 className="text-3xl font-serif text-primary mb-6">
+                                    Customized Internship Program
+                                </h3>
+
+                                <p className="text-gray-600 leading-relaxed mb-8 text-lg">
+                                    Gain hands-on career experience in a real business environment
+                                    with industry leaders.
+                                </p>
+
+                                <div className="space-y-4 mb-12 flex-1">
+                                    {[
+                                        "Real-world business experience",
+                                        "Industry-specific skill development",
+                                        "Professional networking opportunities",
+                                        "Stand out in the job market",
+                                    ].map((item, i) => (
+                                        <div key={i} className="flex items-start gap-3">
+                                            <CheckCircle2 className="w-6 h-6 text-primary shrink-0 mt-0.5" />
+                                            <span className="text-gray-700 font-medium">{item}</span>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <Button className="w-full rounded-full bg-primary text-white hover:bg-primary/90 py-6 text-lg font-bold shadow-lg group-hover:shadow-xl transition-all">
+                                    Learn More <ArrowRight className="ml-2 w-5 h-5" />
+                                </Button>
+                            </motion.div>
+                        </Link>
                         {/* Card 1: DataCAP */}
                         <motion.div
                             whileHover={{ y: -10 }}
@@ -135,46 +175,6 @@ export default function StudentsGraduates() {
                             </Link>
                         </motion.div>
 
-                        {/* Card 3: Intern Jobs */}
-                        <Link href="/job-search" className="h-full">
-                            <motion.div
-                                whileHover={{ y: -10 }}
-                                className="bg-white rounded-[2rem] p-10 flex flex-col h-full shadow-2xl border border-primary/5 relative overflow-hidden group cursor-pointer"
-                            >
-                                <div className="absolute -right-12 -top-12 w-40 h-40 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-all duration-500" />
-
-                                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-8 text-primary">
-                                    <Briefcase className="w-8 h-8" />
-                                </div>
-
-                                <h3 className="text-3xl font-serif text-primary mb-6">
-                                    Intern Jobs
-                                </h3>
-
-                                <p className="text-gray-600 leading-relaxed mb-8 text-lg">
-                                    Gain hands-on career experience in a real business environment
-                                    with industry leaders.
-                                </p>
-
-                                <div className="space-y-4 mb-12 flex-1">
-                                    {[
-                                        "Real-world business experience",
-                                        "Industry-specific skill development",
-                                        "Professional networking opportunities",
-                                        "Stand out in the job market",
-                                    ].map((item, i) => (
-                                        <div key={i} className="flex items-start gap-3">
-                                            <CheckCircle2 className="w-6 h-6 text-primary shrink-0 mt-0.5" />
-                                            <span className="text-gray-700 font-medium">{item}</span>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                <Button className="w-full rounded-full bg-primary text-white hover:bg-primary/90 py-6 text-lg font-bold shadow-lg group-hover:shadow-xl transition-all">
-                                    Browse Jobs <ArrowRight className="ml-2 w-5 h-5" />
-                                </Button>
-                            </motion.div>
-                        </Link>
                     </div>
                 </div>
             </section>

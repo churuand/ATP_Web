@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Search, MapPin, Briefcase, Building2, Clock, ArrowRight, X, User, LogOut, ChevronDown, DollarSign, BadgeCheck, Plus, CheckCircle } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import type { Member } from "@/services/authService";
 import { mockInternJobs, mockLocations, mockFunctions, mockIndustries, mockJobTypes, addNewJob, type InternJob } from "@/mocks/data";
 
@@ -811,9 +812,9 @@ export default function JobSearch() {
                 </div>
             </section>
 
-            <section className="py-8 bg-secondary/30 min-h-[600px]">
-                <div className="container mx-auto px-4">
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+            <section className="py-12 bg-secondary/30 min-h-[780px]">
+                <div className="container mx-auto px-2">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
                         <h2 className="text-xl font-serif text-primary">
                             Found <span className="text-accent">{filteredJobs.length}</span> {filteredJobs.length === 1 ? 'result' : 'results'}
                         </h2>
@@ -835,18 +836,19 @@ export default function JobSearch() {
                                 <Search className="w-8 h-8 text-gray-400" />
                             </div>
                             <h3 className="text-xl font-serif text-primary mb-2">No jobs found</h3>
-                            <p className="text-gray-500 mb-6">Try adjusting your filters or search terms</p>
-                            <Button
-                                onClick={resetFilters}
-                                variant="outline"
-                                className="rounded-full border-primary/20 text-primary hover:bg-primary/5"
-                            >
-                                Reset Filters
-                            </Button>
+                            <p className="text-gray-500 mb-6">More opportunities are on the way — submit your CV and we’ll reach out when a role matches your profile.</p>
+                            <Link href="/upload-cv">
+                                <Button
+                                    // className="rounded-full border-primary/20 text-primary hover:bg-primary/5"
+                                    className="rounded-full border-primary/20 text-secondary hover:bg-red-500/60 hover:shadow-xl hover:-translate-y-0.5 transition-all"
+                                >
+                                    Submit CV
+                                </Button>
+                            </Link>
                         </div>
                     ) : (
                         <div className="grid lg:grid-cols-5 gap-6">
-                            <div className={`lg:col-span-2 space-y-3 max-h-[calc(100vh-300px)] overflow-y-auto pr-2 ${showMobileDetails ? 'hidden lg:block' : ''}`}>
+                            <div className={`lg:col-span-2 space-y-3 max-h-[calc(100vh-100px)] overflow-y-auto pr-2 ${showMobileDetails ? 'hidden lg:block' : ''}`}>
                                 {filteredJobs.map((job) => (
                                     <JobListCard
                                         key={job.id}
@@ -857,7 +859,7 @@ export default function JobSearch() {
                                 ))}
                             </div>
 
-                            <div className={`lg:col-span-3 h-[calc(100vh-300px)] ${!showMobileDetails ? 'hidden lg:block' : ''}`}>
+                            <div className={`lg:col-span-3 min-h-[560px] lg:h-[calc(100vh-100px)] ${!showMobileDetails ? 'hidden lg:block' : ''}`}>
                                 {showMobileDetails && (
                                     <button
                                         onClick={() => setShowMobileDetails(false)}
@@ -872,7 +874,7 @@ export default function JobSearch() {
                         </div>
                     )}
                 </div>
-            </section>
+            </section >
 
             <section className="py-16 bg-primary text-white">
                 <div className="container mx-auto px-4 text-center">
@@ -890,51 +892,13 @@ export default function JobSearch() {
                     </Link>
                 </div>
             </section>
-
-            <footer className="bg-gray-900 text-white py-12">
-                <div className="container mx-auto px-4">
-                    <div className="grid md:grid-cols-4 gap-8">
-                        <div>
-                            <img src="https://atp-global.com.au/images/logo.webp" alt="ATP Global" className="h-10 mb-4 brightness-0 invert" />
-                            <p className="text-gray-400 text-sm">
-                                Connecting international students with career opportunities in Australia.
-                            </p>
-                        </div>
-                        <div>
-                            <h4 className="font-semibold mb-4">For Students</h4>
-                            <ul className="space-y-2 text-gray-400 text-sm">
-                                <li><Link href="/job-search" className="hover:text-white transition-colors">Find Internships</Link></li>
-                                <li><a href="https://atp-global.com.au/testimonials" className="hover:text-white transition-colors">Testimonials</a></li>
-                                <li><Link href="/datacap" className="hover:text-white transition-colors">DataCAP</Link></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 className="font-semibold mb-4">For Employers</h4>
-                            <ul className="space-y-2 text-gray-400 text-sm">
-                                <li><a href="https://atp-global.com.au/recruitment" className="hover:text-white transition-colors">Post a Job</a></li>
-                                <li><a href="https://atp-global.com.au/partner" className="hover:text-white transition-colors">Become a Partner</a></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 className="font-semibold mb-4">Contact</h4>
-                            <ul className="space-y-2 text-gray-400 text-sm">
-                                <li><a href="mailto:info@atp-global.com.au" className="hover:text-white transition-colors">info@atp-global.com.au</a></li>
-                                <li><a href="https://atp-global.com.au/contact-us" className="hover:text-white transition-colors">Contact Us</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500 text-sm">
-                        &copy; {new Date().getFullYear()} ATP Global. All rights reserved.
-                    </div>
-                </div>
-            </footer>
-
+            <Footer />
             <PostJobModal
                 isOpen={showPostJobModal}
                 onClose={() => setShowPostJobModal(false)}
                 onSuccess={handleJobPosted}
                 isAuthenticated={isAuthenticated}
             />
-        </div>
+        </div >
     );
 }

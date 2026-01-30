@@ -1,12 +1,12 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { 
-  ArrowRight, 
-  Building2, 
-  Users, 
-  Handshake, 
-  Search, 
+import {
+  ArrowRight,
+  Building2,
+  Users,
+  Handshake,
+  Search,
   CheckCircle2,
   LineChart,
   Target
@@ -31,13 +31,13 @@ export default function Programs() {
       {/* Hero Section */}
       <div className="relative h-[60vh] min-h-[500px] w-full overflow-hidden bg-primary">
         <div className="absolute inset-0 bg-black/20 z-10" />
-        <img 
-          src={employerHero} 
-          alt="Employers success" 
+        <img
+          src={employerHero}
+          alt="Employers success"
           className="absolute inset-0 w-full h-full object-cover grayscale opacity-60"
         />
         <div className="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center text-white">
-          <motion.div 
+          <motion.div
             initial="initial"
             animate="animate"
             variants={fadeIn}
@@ -55,20 +55,20 @@ export default function Programs() {
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-stretch">
-            
+
             {/* Recruitment Solutions */}
-            <motion.div 
+            <motion.div
               whileHover={{ y: -10 }}
               className="bg-white rounded-[2rem] p-10 flex flex-col h-full shadow-2xl border border-primary/5 relative overflow-hidden group"
             >
               <div className="absolute -right-12 -top-12 w-40 h-40 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-all duration-500" />
-              
+
               <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-8 text-primary">
                 <Search className="w-8 h-8" />
               </div>
-              
+
               <h3 className="text-4xl font-serif text-primary mb-6">Recruitment Solutions</h3>
-              
+
               <p className="text-gray-600 leading-relaxed mb-8 text-lg">
                 Stop filtering through thousands of unqualified resumes. We deliver pre-assessed, high-potential graduates tailored to your specific industry requirements.
               </p>
@@ -86,7 +86,7 @@ export default function Programs() {
                   </div>
                 ))}
               </div>
-              
+
               <Link href="/recruitment">
                 <Button className="w-full rounded-full bg-primary text-white hover:bg-primary/90 py-6 text-lg font-bold shadow-lg group-hover:shadow-xl transition-all">
                   Hire Now <ArrowRight className="ml-2 w-5 h-5" />
@@ -95,18 +95,18 @@ export default function Programs() {
             </motion.div>
 
             {/* Become a Partner */}
-            <motion.div 
+            <motion.div
               whileHover={{ y: -10 }}
               className="bg-secondary rounded-[2rem] p-10 flex flex-col h-full shadow-2xl border border-primary/5 relative overflow-hidden group"
             >
               <div className="absolute -right-12 -top-12 w-40 h-40 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-all duration-500" />
-              
+
               <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-8 text-primary">
                 <Handshake className="w-8 h-8" />
               </div>
-              
+
               <h3 className="text-4xl font-serif text-primary mb-6">Become Our Partner</h3>
-              
+
               <p className="text-gray-600 leading-relaxed mb-8 text-lg">
                 Host an intern and shape the future of your industry. Our partnership programs allow you to mentor top talent while solving real business challenges.
               </p>
@@ -124,8 +124,8 @@ export default function Programs() {
                   </div>
                 ))}
               </div>
-              
-              <Link href="/partner">
+
+              <Link href="/partners">
                 <Button variant="outline" className="w-full rounded-full border-primary text-primary hover:bg-primary hover:text-white py-6 text-lg font-bold shadow-sm transition-all cursor-pointer">
                   Partner with us <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>

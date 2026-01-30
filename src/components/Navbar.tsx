@@ -18,7 +18,7 @@ export default function Navbar() {
                     <Link href="/">
                         <img
                             src="https://atp-global.com.au/images/logo.webp"
-                            alt="ATP Global"
+                            alt="ATP Global logo"
                             className="h-12 w-auto object-contain cursor-pointer"
                         />
                     </Link>
