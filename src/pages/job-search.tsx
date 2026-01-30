@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -205,41 +205,43 @@ function JobListCard({ job, isSelected, onClick }: { job: InternJob; isSelected:
     );
 }
 
-function JobDetailsPanel({ job }: { job: InternJob }) {
+function JobDetailsPanel({ job, panelRef }: { job: InternJob; panelRef?: React.RefObject<HTMLDivElement | null> }) {
     return (
-        <div className="bg-white rounded-2xl shadow-lg p-6 lg:p-8 h-full overflow-y-auto">
-            <div className="flex items-start justify-between gap-4 mb-4">
-                <h2 className="text-2xl font-serif text-primary">{job.title}</h2>
-                {job.isAtpPartner && (
-                    <span className="px-3 py-1 rounded-full bg-primary text-white text-xs font-medium whitespace-nowrap flex-shrink-0">
-                        ATP Partner
-                    </span>
-                )}
+        <div ref={panelRef} className="bg-white rounded-2xl shadow-lg h-full overflow-y-auto">
+            <div className="sticky top-0 z-10 border-b border-gray-100 bg-white/95 backdrop-blur-sm px-6 lg:px-8 py-6">
+                <div className="flex items-start justify-between gap-4 mb-4">
+                    <h2 className="text-2xl font-serif text-primary">{job.title}</h2>
+                    {job.isAtpPartner && (
+                        <span className="px-3 py-1 rounded-full bg-primary text-white text-xs font-medium whitespace-nowrap flex-shrink-0">
+                            ATP Partner
+                        </span>
+                    )}
+                </div>
+
+                <div className="flex flex-wrap gap-3 mb-6 text-sm text-gray-600">
+                    <div className="flex items-center gap-1">
+                        <MapPin className="w-4 h-4" />
+                        <span>{job.location}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                        <Clock className="w-4 h-4" />
+                        <span>{job.jobType}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                        <DollarSign className="w-4 h-4" />
+                        <span>{job.isPaid ? 'Paid' : 'Unpaid'}</span>
+                    </div>
+                </div>
+
+                <Link href={`/apply-internship/${job.id}`}>
+                    <Button className="w-full sm:w-auto rounded-xl bg-primary text-white hover:bg-primary/90 px-8 py-3 shadow-lg shadow-primary/20">
+                        <ArrowRight className="w-4 h-4 mr-2" />
+                        Apply Now
+                    </Button>
+                </Link>
             </div>
 
-            <div className="flex flex-wrap gap-3 mb-6 text-sm text-gray-600">
-                <div className="flex items-center gap-1">
-                    <MapPin className="w-4 h-4" />
-                    <span>{job.location}</span>
-                </div>
-                <div className="flex items-center gap-1">
-                    <Clock className="w-4 h-4" />
-                    <span>{job.jobType}</span>
-                </div>
-                <div className="flex items-center gap-1">
-                    <DollarSign className="w-4 h-4" />
-                    <span>{job.isPaid ? 'Paid' : 'Unpaid'}</span>
-                </div>
-            </div>
-
-            <Link href={`/apply-internship/${job.id}`}>
-                <Button className="w-full sm:w-auto rounded-xl bg-primary text-white hover:bg-primary/90 px-8 py-3 mb-8 shadow-lg shadow-primary/20">
-                    <ArrowRight className="w-4 h-4 mr-2" />
-                    Apply Now
-                </Button>
-            </Link>
-
-            <div className="border-t border-gray-100 pt-6 space-y-6">
+            <div className="px-6 lg:px-8 pt-6 pb-8 space-y-6">
                 <div>
                     <h3 className="font-semibold text-gray-900 mb-3">Job Description</h3>
                     <p className="text-gray-600 leading-relaxed">{job.description}</p>
@@ -621,6 +623,7 @@ export default function JobSearch() {
     const [showMobileDetails, setShowMobileDetails] = useState(false);
     const [showPostJobModal, setShowPostJobModal] = useState(false);
     const [jobsVersion, setJobsVersion] = useState(0);
+    const detailsPanelRef = useRef<HTMLDivElement>(null);
 
     const filteredJobs = useMemo(() => {
         return mockInternJobs.filter((job) => {
@@ -675,6 +678,12 @@ export default function JobSearch() {
         setSelectedJob(job);
         setShowMobileDetails(true);
     };
+
+    useEffect(() => {
+        if (detailsPanelRef.current) {
+            detailsPanelRef.current.scrollTo({ top: 0 });
+        }
+    }, [selectedJob?.id]);
 
     return (
         <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden">
@@ -858,7 +867,7 @@ export default function JobSearch() {
                                         Back to job list
                                     </button>
                                 )}
-                                {selectedJob && <JobDetailsPanel job={selectedJob} />}
+                                {selectedJob && <JobDetailsPanel job={selectedJob} panelRef={detailsPanelRef} />}
                             </div>
                         </div>
                     )}
