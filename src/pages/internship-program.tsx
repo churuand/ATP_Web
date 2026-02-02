@@ -141,12 +141,12 @@ export default function InternshipProgram() {
                                         Apply Now <ArrowRight className="ml-2 w-5 h-5" />
                                     </Button>
                                 </Link>
-                                <Link href="/contact-us">
+                                <Link href="/job-search">
                                     <Button
                                         variant="outline"
                                         className="rounded-full border-primary text-primary hover:bg-primary/5 px-8 py-6 text-lg font-bold"
                                     >
-                                        Book a Consultation
+                                        Explore Internship Jobs
                                     </Button>
                                 </Link>
                             </div>
@@ -323,51 +323,103 @@ export default function InternshipProgram() {
                 </div>
             </section>
 
-            {/* Mentor Support */}
-            {/* <section className="py-24 bg-secondary/20">
+            {/* Testimonials Section */}
+            <section className="py-24 bg-gray-50">
                 <div className="container mx-auto px-4">
-                    <div className="max-w-5xl mx-auto">
-                        <motion.div
-                            whileHover={{ scale: 1.01 }}
-                            className="bg-primary p-10 lg:p-16 rounded-[2.5rem] text-white shadow-xl shadow-primary/20"
-                        >
-                            <div className="grid lg:grid-cols-2 gap-10 items-center">
-                                <div>
-                                    <p className="text-xs font-bold uppercase tracking-widest text-white/70 mb-4">
-                                        Mentor Support
-                                    </p>
-                                    <h2 className="text-4xl font-serif uppercase mb-6">
-                                        Real HR Mentors, <br /> 1:1 Coaching
-                                    </h2>
-                                    <p className="text-white/80 leading-relaxed mb-8">
-                                        Our HR mentors are veteran recruiters and hiring managers
-                                        who work with you individually to review your CV, practice
-                                        interviews, and demystify Australian workplace expectations.
-                                    </p>
-                                    <div className="flex items-center gap-4 bg-white/10 rounded-2xl p-4">
-                                        <Headset className="w-8 h-8" />
-                                        <div>
-                                            <p className="font-bold">1:1 HR Mentor Time</p>
-                                            <p className="text-sm text-white/70">
-                                                Guided prep, feedback, cultural confidence.
-                                            </p>
-                                        </div>
-                                    </div>
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl lg:text-4xl font-serif font-bold text-primary mb-4">
+                            Why students chose us:
+                        </h2>
+                        <p className="text-gray-500 text-lg">Real voices, real results</p>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-8 mb-12">
+                        {/* Testimonial 1 */}
+                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all flex flex-col h-full">
+                            <div className="flex items-center gap-4 mb-6">
+                                <div className="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg">
+                                    A
                                 </div>
-                                <div className="text-center">
-                                    <div className="inline-block bg-white/10 rounded-[2rem] p-8">
-                                        <p className="text-6xl font-serif font-bold mb-2">90%+</p>
-                                        <p className="text-white/80">
-                                            Students placed within 10 weeks
-                                        </p>
+                                <div>
+                                    <div className="font-bold text-gray-900">Amy</div>
+                                    <div className="text-xs text-gray-500 uppercase tracking-wide">
+                                        Finance
                                     </div>
                                 </div>
                             </div>
-                        </motion.div>
+                            <p className="text-gray-600 leading-relaxed text-sm flex-1">
+                                "As a Master's student at Monash University, I found the career
+                                consultation session incredibly valuable. I received detailed
+                                feedback on my resume, helping me refine key sections to make my
+                                CV more concise and impactful. I also learned how to structure
+                                an effective cover letter, giving me a clearer understanding of
+                                how to present myself in job applications."
+                            </p>
+                        </div>
+
+                        {/* Testimonial 2 */}
+                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all flex flex-col h-full relative overflow-hidden">
+                            <div className="absolute top-0 left-0 w-full h-1 bg-primary/20"></div>
+                            <div className="flex items-center gap-4 mb-6">
+                                <div className="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold text-lg">
+                                    T
+                                </div>
+                                <div>
+                                    <div className="font-bold text-gray-900">Ted</div>
+                                    <div className="text-xs text-gray-500 uppercase tracking-wide">
+                                        Data Analyst
+                                    </div>
+                                </div>
+                            </div>
+                            <p className="text-gray-600 leading-relaxed text-sm flex-1">
+                                "Two weeks ago, I received the email I had been waiting for a
+                                job offer! Since then, I've been working through the onboarding
+                                process, and next week, I'll officially begin this new chapter
+                                in my career. This achievement wouldn't have been possible
+                                without the support and reference from my mentor."
+                            </p>
+                        </div>
+
+                        {/* Testimonial 3 */}
+                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all flex flex-col h-full">
+                            <div className="flex items-center gap-4 mb-6">
+                                <div className="w-12 h-12 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-lg">
+                                    M
+                                </div>
+                                <div>
+                                    <div className="font-bold text-gray-900">My Ngoc</div>
+                                    <div className="text-xs text-gray-500 uppercase tracking-wide">
+                                        Marketing
+                                    </div>
+                                </div>
+                            </div>
+                            <p className="text-gray-600 leading-relaxed text-sm flex-1">
+                                "As a student at Torrens University, I found the competency
+                                assessment session truly essential. It helped me clearly
+                                understand what skills I was lacking and where to start
+                                improving. Eric, who conducted the assessment, was approachable,
+                                friendly, and explained everything thoroughly with plenty of
+                                examples."
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="text-center">
+                        <a
+                            href="https://atp-global.com.au/testimonials"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <Button
+                                variant="outline"
+                                className="rounded-full border-primary text-primary hover:bg-primary hover:text-white px-8 transition-colors"
+                            >
+                                See more success stories
+                            </Button>
+                        </a>
                     </div>
                 </div>
-            </section> */}
-
+            </section>
             {/* Partner Logos */}
             <section className="py-24 bg-[#ecf0ee]">
                 <div className="container mx-auto px-4 text-center">

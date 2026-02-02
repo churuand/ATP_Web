@@ -114,23 +114,20 @@ export default function Home() {
 
                 {/* Top row */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-left">
-                  <Link href="/students-graduates">
+                  <Link href="/apply-internship">
                     <Button className="rounded-full bg-primary text-white hover:bg-primary/90 px-8 py-6 text-lg font-medium shadow-lg shadow-primary/20 hover:shadow-xl hover:-translate-y-0.5 transition-all w-full sm:w-auto">
                       Apply now!
                     </Button>
                   </Link>
 
-                  <Button
-                    variant="outline"
-                    className="rounded-full border-primary/20 text-primary hover:bg-primary/5 px-8 py-6 text-lg font-medium hover:-translate-y-0.5 transition-all w-full sm:w-auto"
-                    onClick={() => {
-                      const nextSection =
-                        document.getElementById("welcome-section");
-                      nextSection?.scrollIntoView({ behavior: "smooth" });
-                    }}
-                  >
-                    Learn more
-                  </Button>
+                  <Link href="internship-program">
+                    <Button
+                      variant="outline"
+                      className="rounded-full border-primary/20 text-primary hover:bg-primary/5 px-8 py-6 text-lg font-medium hover:-translate-y-0.5 transition-all w-full sm:w-auto"
+                    >
+                      Learn more
+                    </Button>
+                  </Link>
                 </div>
 
                 {/* Bottom button */}

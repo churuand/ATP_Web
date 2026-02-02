@@ -187,7 +187,7 @@ export default function StudentsGraduates() {
                     </h2>
                     <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto font-medium">
                         <div className="space-y-2">
-                            <div className="text-4xl text-primary font-serif">1,000+</div>
+                            <div className="text-4xl text-primary font-serif">10,000+</div>
                             <div className="text-gray-500 uppercase tracking-widest text-xs">
                                 Graduates Placed
                             </div>

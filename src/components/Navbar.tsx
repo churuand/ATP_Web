@@ -8,7 +8,7 @@ export default function Navbar() {
         { href: "/students-graduates", label: "Students & Graduates" },
         { href: "/programs", label: "Employers" },
         { href: "/job-search", label: "Job Board" },
-        { href: "/about-us", label: "About Us" },
+        // { href: "/about-us", label: "About Us" },
     ];
 
     return (
@@ -37,14 +37,14 @@ export default function Navbar() {
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <Link href="/contact-us">
+                    <Link href="/about-us">
                         <Button variant="outline" className="hidden sm:flex rounded-full border-gray-200 text-gray-700 hover:bg-gray-50 hover:text-primary">
-                            Contact Us
+                            About Us
                         </Button>
                     </Link>
-                    <Link href="/student-portal">
+                    <Link href="/contact-us">
                         <Button className="rounded-full bg-primary text-white hover:bg-primary/90 px-6">
-                            Learning Hub
+                            Contact Us
                         </Button>
                     </Link>
                 </div>
