@@ -11,6 +11,7 @@ export default function Navbar() {
         // { href: "/about-us", label: "About Us" },
     ];
 
+
     return (
         <nav className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-gray-100">
             <div className="container mx-auto px-4 h-20 flex items-center justify-between">

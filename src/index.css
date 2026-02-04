@@ -4,10 +4,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* --font-sans: "Nunito", sans-serif;
-  --font-serif: "Nunito", serif; */
-  --font-sans: "DM Sans", "Inter", sans-serif;
-  --font-serif: "Playfair Display", serif;
+  --font-sans: "Nunito", sans-serif;
+  --font-serif: "Nunito", serif;
+  /* --font-sans: "DM Sans", "Inter", sans-serif;
+  --font-serif: "Playfair Display", serif; */
 
   --radius-sm: 0.5rem;
   --radius-md: 0.75rem;
@@ -36,6 +36,9 @@
 
   --color-muted: hsl(356 10% 94%);
   --color-muted-foreground: hsl(356 10% 40%);
+
+  --color-success: hsl(145 55% 35%);
+  --color-success-foreground: hsl(0 0% 100%);
 
   --color-accent: hsl(25 90% 55%);
   --color-accent-foreground: hsl(0 0% 100%);

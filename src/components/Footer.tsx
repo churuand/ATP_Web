@@ -1,4 +1,47 @@
 import { Link } from "wouter";
+import { AtSign, Facebook, Linkedin, Youtube } from "lucide-react";
+
+const socialLinks = [
+    {
+        href: "https://www.facebook.com/apextalentpartners",
+        label: "Facebook",
+        Icon: Facebook,
+    },
+    {
+        href: "https://www.youtube.com/@ApexTalentPartners",
+        label: "YouTube",
+        Icon: Youtube,
+    },
+    {
+        href: "https://www.linkedin.com/company/atp-global-au",
+        label: "LinkedIn",
+        Icon: Linkedin,
+    },
+    {
+        href: "https://threads.net/@apextalentpartners",
+        label: "Threads",
+        Icon: AtSign,
+    },
+];
+
+const officeLocations = [
+    {
+        label: "Sydney",
+        address: "Level 45, 680 George Street, Sydney, NSW 2000, Australia",
+    },
+    {
+        label: "Melbourne",
+        address: "Level 3, 162 Collins St, Melbourne, VIC 3000",
+    },
+    {
+        label: "China",
+        address: "Floor 18, Building B, Enterprise Plaza, No. 125 Qingnian Street, Shenhe District, Shenyang City",
+    },
+    {
+        label: "Vietnam",
+        address: "30-32 Vuong Thua Vu Street, Khuong Thuong Ward, Thanh Xuan District, Hanoi City",
+    },
+];
 
 export default function Footer() {
     return (
@@ -11,18 +54,29 @@ export default function Footer() {
                             alt="ATP Global"
                             className="h-10 mb-6 brightness-0 invert"
                         />
-                        <p className="text-white/40 text-sm leading-relaxed">
-                            Connecting extraordinary talent with world-class opportunities
-                            through meaningful internships.
-                        </p>
+                        <div className="space-y-3 text-sm text-white/90">
+                            <p className="text-xs font-semibold text-white/90 uppercase tracking-[0.2em]">
+                                Our offices
+                            </p>
+                            <ul className="space-y-3 text-[13px]">
+                                {officeLocations.map(({ label, address }) => (
+                                    <li key={label}>
+                                        <p className="text-white/90 font-semibold">
+                                            {label}
+                                        </p>
+                                        <p className="leading-tight">{address}</p>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
-                    <div>
+                    <div className="col-span-2 md:col-span-1">
                         <h5 className="font-medium mb-4 text-white/90">For Students</h5>
                         <ul className="space-y-2 text-sm text-white/40">
                             <li>
-                                <a href="#" className="hover:text-primary transition-colors">
+                                <Link href="/internship-program" className="hover:text-primary transition-colors">
                                     Internship Programs
-                                </a>
+                                </Link>
                             </li>
                             <li>
                                 <Link
@@ -40,14 +94,14 @@ export default function Footer() {
                                     Success Stories
                                 </Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <a href="#" className="hover:text-primary transition-colors">
                                     FAQ
                                 </a>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
-                    <div>
+                    <div className="col-span-2 md:col-span-1">
                         <h5 className="font-medium mb-4 text-white/90">For Employers</h5>
                         <ul className="space-y-2 text-sm text-white/40">
                             <li>
@@ -64,7 +118,7 @@ export default function Footer() {
                             </li>
                         </ul>
                     </div>
-                    <div>
+                    <div className="col-span-2 md:col-span-1">
                         <h5 className="font-medium mb-4 text-white/90">Company</h5>
                         <ul className="space-y-2 text-sm text-white/40">
                             <li>
@@ -76,15 +130,15 @@ export default function Footer() {
                                 </Link>
                             </li>
 
-                            <li>
+                            {/* <li>
                                 <a href="#" className="hover:text-primary transition-colors">
                                     Careers
                                 </a>
-                            </li>
+                            </li> */}
                             <li>
-                                <a href="#" className="hover:text-primary transition-colors">
+                                {/* <a href="#" className="hover:text-primary transition-colors">
                                     Blog
-                                </a>
+                                </a> */}
                             </li>
                             <li>
                                 <a href="#" className="hover:text-primary transition-colors">
@@ -94,15 +148,33 @@ export default function Footer() {
                         </ul>
                     </div>
                 </div>
-                <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/20">
+
+                <div className="flex flex-col gap-3 mb-12">
+                    <p className="text-sm font-semibold text-white/90">Social</p>
+                    <div className="flex items-center gap-4 text-white/80">
+                        {socialLinks.map(({ href, label, Icon }) => (
+                            <a
+                                key={label}
+                                href={href}
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label={label}
+                                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white transition hover:border-primary/60 hover:bg-primary/10 transition-colors"
+                            >
+                                <Icon size={18} />
+                            </a>
+                        ))}
+                    </div>
+                </div>
+                <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/70">
                     <p>© 2025 ATP Global. All rights reserved.</p>
                     <div className="flex gap-6">
-                        <a href="#" className="hover:text-white transition-colors">
+                        {/* <a href="#" className="hover:text-white transition-colors">
                             Privacy Policy
                         </a>
                         <a href="#" className="hover:text-white transition-colors">
                             Terms of Service
-                        </a>
+                        </a> */}
                     </div>
                 </div>
             </div>

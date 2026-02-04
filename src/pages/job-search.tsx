@@ -176,12 +176,12 @@ function JobListCard({ job, isSelected, onClick }: { job: InternJob; isSelected:
                 <h3 className="font-semibold text-primary text-sm leading-tight">{job.title}</h3>
                 <div className="flex gap-1 flex-shrink-0">
                     {job.isAtpPartner && (
-                        <span className="px-2 py-0.5 rounded-full bg-primary text-white text-[10px] font-medium whitespace-nowrap">
+                        <span className="px-2 py-0.5 rounded-full bg-secondary text-primary text-[10px] font-medium whitespace-nowrap">
                             ATP Partner
                         </span>
                     )}
                     {job.isPaid && (
-                        <span className="px-2 py-0.5 rounded-full bg-green-500 text-white text-[10px] font-medium">
+                        <span className="px-2 py-0.5 rounded-full bg-success text-white text-[10px] font-medium">
                             Paid
                         </span>
                     )}
@@ -213,7 +213,7 @@ function JobDetailsPanel({ job, panelRef }: { job: InternJob; panelRef?: React.R
                 <div className="flex items-start justify-between gap-4 mb-4">
                     <h2 className="text-2xl font-serif text-primary">{job.title}</h2>
                     {job.isAtpPartner && (
-                        <span className="px-3 py-1 rounded-full bg-primary text-white text-xs font-medium whitespace-nowrap flex-shrink-0">
+                        <span className="px-3 py-1 rounded-full bg-secondary text-primary text-xs font-medium whitespace-nowrap flex-shrink-0">
                             ATP Partner
                         </span>
                     )}
@@ -698,8 +698,8 @@ export default function JobSearch() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
-                            <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-success/10 text-success text-sm font-medium mb-6">
+                            <span className="w-2 h-2 rounded-full bg-success animate-pulse"></span>
                             {filteredJobs.length} opportunities available
                         </div>
 
