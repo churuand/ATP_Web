@@ -8,6 +8,7 @@ export default function Navbar() {
         { href: "/students-graduates", label: "Students & Graduates" },
         { href: "/programs", label: "Employers" },
         { href: "/job-search", label: "Job Board" },
+        { href: "/partners-opportunities", label: "Our Partners" },
         // { href: "/about-us", label: "About Us" },
     ];
 

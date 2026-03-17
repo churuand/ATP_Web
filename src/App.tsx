@@ -28,12 +28,14 @@ import ApplySuccess from "@/pages/apply-success";
 import ContactUs from "@/pages/contact-us";
 import JobSearch from "@/pages/job-search";
 import Partners from "@/pages/partners";
+import PartnersOpportunities from "@/pages/partners-opportunities";
 import SuccessStories from "@/pages/success-stories";
 import UploadCV from "@/pages/upload-cv";
 import DataCAP from "@/pages/datacap";
 import NotFound from "@/pages/not-found";
 import StudentsGraduates from "@/pages/students-graduates";
 import AboutUs from "@/pages/about-us";
+import BlogArticlePage from "@/pages/blog-article";
 
 function Router() {
   return (
@@ -46,6 +48,7 @@ function Router() {
       <Route path="/about-us" component={AboutUs} />
       <Route path="/contact-us" component={ContactUs} />
       <Route path="/partners" component={Partners} />
+      <Route path="/partners-opportunities" component={PartnersOpportunities} />
       <Route path="/success-stories" component={SuccessStories} />
       <Route path="/recruitment" component={SuccessStories} />
       <Route path="/datacap" component={DataCAP} />
@@ -56,6 +59,7 @@ function Router() {
       <Route path="/apply-internship" component={ApplyInternship} />
       <Route path="/apply-success" component={ApplySuccess} />
       <Route path="/upload-cv" component={UploadCV} />
+      <Route path="/blog" component={BlogArticlePage} />
 
       {/* OAuth callback routes */}
       <Route path="/auth/google/callback" component={GoogleAuthCallback} />
