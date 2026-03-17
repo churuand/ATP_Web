@@ -1,4 +1,5 @@
 import { get, post, setToken, removeToken } from '../lib/api';
+import { FEATURES } from '@/config/features';
 import { config } from '../lib/config';
 
 export interface Member {
@@ -127,6 +128,9 @@ export async function logout(): Promise<void> {
  * Open OAuth popup window
  */
 export function openOAuthPopup(url: string, provider: string): Promise<string> {
+  if (FEATURES.USE_MOCK_DATA) {
+    return Promise.resolve(`${provider}_mock_code`);
+  }
   return new Promise((resolve, reject) => {
     const width = 600;
     const height = 700;
