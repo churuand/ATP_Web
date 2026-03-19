@@ -15,7 +15,7 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
 // Mock Assets
-import employerHero from "@assets/generated_images/friendly_employer_portrait.png";
+import employerHero from "@assets/generated_images/networking_tip_vertical.png";
 
 export default function Programs() {
   const fadeIn = {
@@ -34,7 +34,7 @@ export default function Programs() {
         <img
           src={employerHero}
           alt="Employers success"
-          className="absolute inset-0 w-full h-full object-cover grayscale opacity-60"
+          className="absolute inset-0 w-full h-full object-cover object-[center_85%] grayscale opacity-60"
         />
         <div className="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center text-white">
           <motion.div
