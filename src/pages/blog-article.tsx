@@ -14,6 +14,8 @@ import { InternshipSearchPod } from "@/components/blog/InternshipSearchPod";
 import { NewsletterSignupCard } from "@/components/blog/NewsletterSignupCard";
 import { AuthorBioCard } from "@/components/blog/AuthorBioCard";
 import { FaqItem, FaqSection } from "@/components/blog/FaqSection";
+import { Button } from "@/components/ui/button";
+import { CARD_RADIUS } from "@/styles/designTokens";
 import heroImage from "@assets/generated_images/mentorship_moment_in_office.png";
 import authorPortrait from "@assets/generated_images/pixel_art_avatar_of_asian_male_in_suit.png";
 
@@ -24,13 +26,22 @@ type ArticleBlock =
   | { type: "heading"; level: "h3" | "h4"; text: string }
   | { type: "bullets"; items: string[] }
   | { type: "ordered"; items: string[] }
-  | { type: "callout"; tone: "tip" | "info" | "warning"; title: string; body: ReactNode }
+  | { type: "callout"; title: string; body: ReactNode }
   | {
     type: "table";
     caption: string;
     headers: string[];
     rows: string[][];
     source?: string;
+  }
+  | { type: "media"; mediaType: "image" | "video"; src: string; alt?: string }
+  | { type: "quote"; text: string; attribution?: string }
+  | {
+    type: "cta";
+    title: string;
+    body: ReactNode;
+    buttonLabel: string;
+    buttonHref: string;
   };
 
 type ArticleSection = {
@@ -94,7 +105,6 @@ const articleSections: ArticleSection[] = [
       },
       {
         type: "callout",
-        tone: "tip",
         title: "Mẹo nhanh",
         body: "Luôn lưu lại email trao đổi với nhà tuyển dụng dưới dạng PDF. Đây là bằng chứng bổ sung hữu ích khi Lãnh sự quán yêu cầu.",
       },
@@ -108,6 +118,23 @@ const articleSections: ArticleSection[] = [
           ["Subclass 408", "Chương trình trao đổi", "Tập trung vào giá trị văn hóa và đào tạo"],
         ],
         source: "Department of Home Affairs",
+      },
+      {
+        type: "media",
+        mediaType: "image",
+        src: heroImage,
+        alt: "Sinh viên quốc tế trao đổi với mentor",
+      },
+      {
+        type: "quote",
+        text: "This is a quote",
+      },
+      {
+        type: "cta",
+        title: "Chúng tôi mới có job data",
+        body: "Dữ liệu mới giúp bạn biết chính xác doanh nghiệp nào đang tuyển thực tập sinh phù hợp. Gửi CV để được ưu tiên match với các vị trí vừa mở.",
+        buttonLabel: "Nộp CV bây giờ",
+        buttonHref: "/upload-cv",
       },
     ],
   },
@@ -140,7 +167,6 @@ const articleSections: ArticleSection[] = [
       },
       {
         type: "callout",
-        tone: "info",
         title: "Trải nghiệm người dùng",
         body: (
           <>
@@ -173,7 +199,6 @@ const articleSections: ArticleSection[] = [
       },
       {
         type: "callout",
-        tone: "warning",
         title: "ROI cần đo lường",
         body: "Sử dụng UTM riêng cho từng CTA để xem phần nội dung nào mang lại nhiều đăng ký nhất.",
       },
@@ -349,7 +374,7 @@ export default function BlogArticlePage() {
     <div className="min-h-screen bg-background text-foreground scroll-smooth">
       <Navbar />
       <main className="container mx-auto px-4 py-10 lg:py-16">
-        <div className="space-y-6">
+        <div className="space-y-8">
           <BreadcrumbTrail items={breadcrumbItems} />
 
           <div className="space-y-4">
@@ -368,22 +393,8 @@ export default function BlogArticlePage() {
             authorName={byline.author}
             authorAnchorId={byline.anchorId}
             updatedDate={byline.updatedDate}
+            updatedText="Cập nhật vào ngày 1 tháng 2, 2025"
           />
-
-          {hero?.src && (
-            <figure className="mt-6">
-              <img
-                src={hero.src}
-                alt={hero.alt}
-                className="w-full rounded-3xl object-cover shadow-xl"
-                loading="lazy"
-              />
-            </figure>
-          )}
-
-          <div className="lg:hidden mt-6">
-            <MobileContentsAccordion headings={tocHeadings} onNavigate={handleNavigate} />
-          </div>
 
           <div className="lg:grid lg:grid-cols-[minmax(240px,280px)_minmax(0,1fr)_minmax(220px,280px)] gap-10 items-start">
             <aside className="hidden lg:block h-full">
@@ -393,92 +404,169 @@ export default function BlogArticlePage() {
             </aside>
 
             <section className="space-y-10">
-              <article className="space-y-10 leading-relaxed">
-                {articleSections.map((section) => (
-                  <div key={section.id} className="space-y-6">
-                    <h2
-                      id={section.id}
-                      ref={handleRegisterHeading(section.id)}
-                      className="text-3xl font-serif text-foreground"
-                    >
-                      {section.title}
-                    </h2>
+              <div className="space-y-8">
+                <div className="lg:hidden sticky top-24 z-30">
+                  <MobileContentsAccordion
+                    headings={tocHeadings}
+                    onNavigate={handleNavigate}
+                    activeId={activeHeadingId}
+                  />
+                </div>
 
-                    <div className="space-y-5 text-base text-muted-foreground">
-                      {section.blocks.map((block, index) => {
-                        switch (block.type) {
-                          case "paragraph":
-                            return (
-                              <p key={index} className="leading-relaxed text-lg text-foreground/90">
-                                {block.content}
-                              </p>
-                            );
-                          case "heading":
-                            if (block.level === "h3") {
-                              return (
-                                <h3 key={index} className="text-2xl font-serif text-foreground mt-4">
-                                  {block.text}
-                                </h3>
-                              );
-                            }
-                            return (
-                              <h4 key={index} className="text-xl font-semibold text-foreground mt-2">
-                                {block.text}
-                              </h4>
-                            );
-                          case "bullets":
-                            return (
-                              <ul key={index} className="list-disc pl-6 space-y-2">
-                                {block.items.map((item) => (
-                                  <li key={item} className="text-foreground/90">
-                                    {item}
-                                  </li>
-                                ))}
-                              </ul>
-                            );
-                          case "ordered":
-                            return (
-                              <ol key={index} className="list-decimal pl-6 space-y-2">
-                                {block.items.map((item) => (
-                                  <li key={item} className="text-foreground/90">
-                                    {item}
-                                  </li>
-                                ))}
-                              </ol>
-                            );
-                          case "callout":
-                            return (
-                              <CalloutBox key={index} tone={block.tone} title={block.title} body={block.body} />
-                            );
-                          case "table":
-                            return (
-                              <ArticleTable
-                                key={index}
-                                caption={block.caption}
-                                headers={block.headers}
-                                rows={block.rows}
-                                source={block.source}
-                              />
-                            );
-                          default:
-                            return null;
-                        }
-                      })}
-                    </div>
-
-                    {section.nextCta && (
-                      <a
-                        href={section.nextCta.href}
-                        className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-primary"
+                <article className="space-y-12 leading-relaxed">
+                  {hero?.src && (
+                    <figure className="w-full overflow-hidden rounded-3xl shadow-xl">
+                      <img
+                        src={hero.src}
+                        alt={hero.alt}
+                        className="h-full w-full object-cover"
+                        loading="lazy"
+                      />
+                    </figure>
+                  )}
+                  {articleSections.map((section, index) => (
+                    <div key={section.id} className="space-y-6">
+                      <h2
+                        id={section.id}
+                        ref={handleRegisterHeading(section.id)}
+                        className={`text-3xl font-serif font-semibold text-foreground ${index === 0 ? "mt-4" : "mt-10"} mb-4`}
                       >
-                        {section.nextCta.label}
-                      </a>
-                    )}
-                  </div>
-                ))}
-              </article>
+                        {section.title}
+                      </h2>
+
+                      <div className="space-y-5 text-base">
+                        {section.blocks.map((block, index) => {
+                          switch (block.type) {
+                            case "paragraph":
+                              return (
+                                <p key={index} className="text-lg leading-relaxed text-gray-700">
+                                  {block.content}
+                                </p>
+                              );
+                            case "heading":
+                              if (block.level === "h3") {
+                                return (
+                                  <h3 key={index} className="mt-8 text-2xl font-semibold text-foreground">
+                                    {block.text}
+                                  </h3>
+                                );
+                              }
+                              return (
+                                <h4 key={index} className="mt-6 text-xl font-semibold text-foreground">
+                                  {block.text}
+                                </h4>
+                              );
+                            case "bullets":
+                              return (
+                                <ul key={index} className="list-disc space-y-3 pl-6 text-base leading-relaxed text-gray-700">
+                                  {block.items.map((item) => (
+                                    <li key={item} className="text-gray-700">
+                                      {item}
+                                    </li>
+                                  ))}
+                                </ul>
+                              );
+                            case "ordered":
+                              return (
+                                <ol key={index} className="list-decimal space-y-3 pl-6 text-base leading-relaxed text-gray-700">
+                                  {block.items.map((item) => (
+                                    <li key={item} className="text-gray-700">
+                                      {item}
+                                    </li>
+                                  ))}
+                                </ol>
+                              );
+                            case "callout":
+                              return (
+                                <CalloutBox key={index} title={block.title} body={block.body} />
+                              );
+                            case "table":
+                              return (
+                                <ArticleTable
+                                  key={index}
+                                  caption={block.caption}
+                                  headers={block.headers}
+                                  rows={block.rows}
+                                  source={block.source}
+                                />
+                              );
+                            case "media":
+                              if (block.mediaType === "video") {
+                                return (
+                                  <div key={index} className="my-6 overflow-hidden rounded-xl shadow-lg">
+                                    <video controls className="h-full w-full" poster={block.src}>
+                                      <source src={block.src} />
+                                      Trình duyệt của bạn không hỗ trợ video.
+                                    </video>
+                                  </div>
+                                );
+                              }
+                              return (
+                                <div key={index} className="my-6 overflow-hidden rounded-xl shadow-lg">
+                                  <img src={block.src} alt={block.alt ?? "Embedded media"} className="h-full w-full object-cover" />
+                                </div>
+                              );
+                            case "quote":
+                              return (
+                                <blockquote
+                                  key={index}
+                                  className={`my-6 ${CARD_RADIUS} border border-primary/30 bg-primary/5 p-6`}
+                                >
+                                  <div className="flex items-start gap-4">
+                                    <span className="text-3xl font-serif text-primary">|</span>
+                                    <div>
+                                      <p className="text-lg font-medium italic text-gray-800 leading-relaxed">{block.text}</p>
+                                      {block.attribution && (
+                                        <span className="mt-2 block text-sm font-semibold text-gray-500">{block.attribution}</span>
+                                      )}
+                                    </div>
+                                  </div>
+                                </blockquote>
+                              );
+                            case "cta":
+                              return (
+                                <div
+                                  key={index}
+                                  className={`my-8 ${CARD_RADIUS} border border-primary/30 bg-primary/5 p-6 shadow-sm`}
+                                >
+                                  <div className="space-y-3">
+                                    <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-primary/70">
+                                      {block.title}
+                                    </p>
+                                    <div className="text-lg font-semibold text-primary leading-relaxed">
+                                      {block.body}
+                                    </div>
+                                  </div>
+                                  <Button
+                                    asChild
+                                    className="mt-5 w-full rounded-full bg-primary text-white hover:bg-primary/90"
+                                  >
+                                    <a href={block.buttonHref}>{block.buttonLabel}</a>
+                                  </Button>
+                                </div>
+                              );
+                            default:
+                              return null;
+                          }
+                        })}
+                      </div>
+
+                      {section.nextCta && (
+                        <a
+                          href={section.nextCta.href}
+                          className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 underline decoration-2 underline-offset-4 transition hover:text-blue-700"
+                        >
+                          {section.nextCta.label}
+                        </a>
+                      )}
+                    </div>
+                  ))}
+                </article>
+              </div>
 
               <div className="flex flex-col gap-8">
+                <FaqSection items={faqItems} />
+
                 <AuthorBioCard
                   id={byline.anchorId}
                   name={byline.author}
@@ -486,12 +574,10 @@ export default function BlogArticlePage() {
                   bio="Hoang dẫn dắt đội ngũ tư vấn thực tập và chịu trách nhiệm xây dựng trải nghiệm nội dung chuẩn SEO để sinh viên quốc tế dễ dàng tìm đến ATP."
                   image={authorPortrait}
                   linkedin="https://www.linkedin.com/company/atp-global-au"
-                  className="order-3 lg:order-1"
+                  facebook="https://www.facebook.com/apextalentpartners"
                 />
 
-                <FaqSection items={faqItems} className="order-1 lg:order-2" />
-
-                <div className="flex flex-col gap-6 lg:hidden order-2">
+                <div className="flex flex-col gap-6 lg:hidden">
                   <InternshipSearchPod />
                   <NewsletterSignupCard source="blog_internship_strategy_mobile" />
                 </div>
