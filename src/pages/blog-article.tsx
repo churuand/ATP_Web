@@ -510,7 +510,7 @@ export default function BlogArticlePage() {
                               return (
                                 <blockquote
                                   key={index}
-                                  className={`my-6 ${CARD_RADIUS} border border-primary/30 bg-primary/5 p-6`}
+                                  className={`my-6 ${CARD_RADIUS} border border-primary/30 p-6`}
                                 >
                                   <div className="flex items-start gap-4">
                                     <span className="text-3xl font-serif text-primary">|</span>
