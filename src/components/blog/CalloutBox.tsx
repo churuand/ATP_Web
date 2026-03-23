@@ -1,26 +1,21 @@
 import { cn } from "@/lib/utils";
+import { CARD_RADIUS } from "@/styles/designTokens";
 import type { ReactNode } from "react";
 
-type CalloutTone = "tip" | "warning" | "info";
-
 interface CalloutBoxProps {
-  tone?: CalloutTone;
   title: string;
   body: ReactNode;
 }
 
-const toneStyles: Record<CalloutTone, string> = {
-  tip: "bg-success/5 border-success/30 text-success",
-  warning: "bg-accent/10 border-accent/40 text-accent-foreground",
-  info: "bg-secondary border-secondary-foreground/10 text-foreground",
-};
+const INFO_STYLE = "bg-secondary border-secondary-foreground/10 text-foreground";
 
-export function CalloutBox({ tone = "info", title, body }: CalloutBoxProps) {
+export function CalloutBox({ title, body }: CalloutBoxProps) {
   return (
     <div
       className={cn(
-        "rounded-2xl border px-6 py-5 shadow-sm",
-        toneStyles[tone]
+        CARD_RADIUS,
+        "border px-6 py-5 shadow-sm",
+        INFO_STYLE
       )}
     >
       <p className="text-sm font-semibold uppercase tracking-wide mb-1">

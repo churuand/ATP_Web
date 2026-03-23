@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import employerHero from "@assets/generated_images/networking_tip_vertical.png";
 
 export default function Partner() {
     const fadeIn = {
@@ -76,7 +77,7 @@ export default function Partner() {
                         >
                             <div className="rounded-[4rem] overflow-hidden shadow-2xl border-8 border-white aspect-[4/5] relative">
                                 <img
-                                    src="https://atp-global.com.au/images/partnership-banner.jpg"
+                                    src={employerHero}
                                     alt="Partnership"
                                     className="w-full h-full object-cover grayscale brightness-90"
                                 />

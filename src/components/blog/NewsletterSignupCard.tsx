@@ -1,6 +1,8 @@
 import { FormEvent, useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { CARD_RADIUS } from "@/styles/designTokens";
 
 interface NewsletterSignupCardProps {
   className?: string;
@@ -75,19 +77,25 @@ export function NewsletterSignupCard({ className, ctaLabel = "Đăng ký", sourc
 
   return (
     <div
-      className={`rounded-3xl border border-border/60 bg-secondary p-6 shadow-sm ${className ?? ""
-        }`}
+      className={cn(
+        CARD_RADIUS,
+        "border border-border/60 bg-secondary p-6 shadow-sm",
+        className
+      )}
     >
-      <div className="space-y-4">
-        <p className="text-xs font-bold uppercase tracking-[0.4em] text-primary/70">
+      <div className="space-y-3">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.4em] text-primary/70">
           Newsletter
         </p>
-        <h3 className="text-lg font-semibold text-foreground">
+        <h3 className="text-xl font-semibold text-foreground leading-snug">
           Cập nhật cơ hội thực tập & webinar độc quyền mỗi tuần.
         </h3>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Nhận bản tin mỗi thứ Hai với sự kiện tuyển dụng, webinar và tài nguyên cập nhật.
+        </p>
       </div>
 
-      <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
+      <form className="mt-5 space-y-4" onSubmit={handleSubmit}>
         <Input
           type="email"
           name="email"
