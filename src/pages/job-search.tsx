@@ -2,76 +2,12 @@ import { useState, useMemo, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Search, MapPin, Briefcase, Building2, Clock, ArrowRight, X, User, LogOut, ChevronDown, DollarSign, BadgeCheck, Plus, CheckCircle } from "lucide-react";
+import { Search, MapPin, Briefcase, Building2, Clock, ArrowRight, X, User, LogOut, ChevronDown, BadgeCheck, Plus, CheckCircle } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import type { Member } from "@/services/authService";
 import { mockInternJobs, mockLocations, mockFunctions, mockIndustries, mockJobTypes, addNewJob, type InternJob } from "@/mocks/data";
-
-function SingleSelectDropdown({
-    label,
-    options,
-    selected,
-    onChange,
-    placeholder
-}: {
-    label: string;
-    options: { value: string; label: string }[];
-    selected: string;
-    onChange: (value: string) => void;
-    placeholder: string;
-}) {
-    const [isOpen, setIsOpen] = useState(false);
-    const selectedOption = options.find(o => o.value === selected);
-
-    return (
-        <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700">{label}</label>
-            <div className="relative">
-                <button
-                    type="button"
-                    onClick={() => setIsOpen(!isOpen)}
-                    className="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 text-gray-900 text-left flex items-center justify-between"
-                >
-                    <span className={!selected ? "text-gray-500" : ""}>
-                        {selectedOption ? selectedOption.label : placeholder}
-                    </span>
-                    <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-                </button>
-
-                {isOpen && (
-                    <>
-                        <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
-                        <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg z-50 max-h-60 overflow-y-auto">
-                            {options.map((option) => (
-                                <button
-                                    key={option.value}
-                                    type="button"
-                                    onClick={() => { onChange(option.value); setIsOpen(false); }}
-                                    className={`w-full text-left px-3 py-2 hover:bg-gray-50 text-sm ${selected === option.value ? 'text-primary font-medium bg-primary/5' : 'text-gray-700'}`}
-                                >
-                                    {option.label}
-                                </button>
-                            ))}
-                        </div>
-                    </>
-                )}
-            </div>
-
-            {selected && (
-                <div className="flex flex-wrap gap-1 mt-1">
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-medium">
-                        {selectedOption?.label}
-                        <button onClick={() => onChange("")} className="hover:text-primary/70">
-                            <X className="w-3 h-3" />
-                        </button>
-                    </span>
-                </div>
-            )}
-        </div>
-    );
-}
 
 function MultiSelectDropdown({
     label,
@@ -107,7 +43,7 @@ function MultiSelectDropdown({
                 <button
                     type="button"
                     onClick={() => setIsOpen(!isOpen)}
-                    className="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 text-gray-900 text-left flex items-center justify-between"
+                    className="w-full min-h-[68px] px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 text-gray-900 text-left flex items-center justify-between"
                 >
                     <span className={selected.length === 0 ? "text-gray-500" : ""}>
                         {selected.length === 0 ? placeholder : `${selected.length} selected`}
@@ -139,7 +75,7 @@ function MultiSelectDropdown({
             </div>
 
             {selected.length > 0 && (
-                <div className="flex flex-wrap gap-1 mt-1">
+                 <div className="flex flex-wrap gap-1 mt-1">
                     {selected.length <= 3 ? (
                         selected.map((item) => (
                             <span
@@ -227,10 +163,6 @@ function JobDetailsPanel({ job, panelRef }: { job: InternJob; panelRef?: React.R
                     <div className="flex items-center gap-1">
                         <Clock className="w-4 h-4" />
                         <span>{job.jobType}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                        <DollarSign className="w-4 h-4" />
-                        <span>{job.isPaid ? 'Paid' : 'Unpaid'}</span>
                     </div>
                 </div>
 
@@ -618,7 +550,6 @@ export default function JobSearch() {
     const [functionFilters, setFunctionFilters] = useState<string[]>([]);
     const [industryFilters, setIndustryFilters] = useState<string[]>([]);
     const [jobTypeFilters, setJobTypeFilters] = useState<string[]>([]);
-    const [contractFilter, setContractFilter] = useState("");
     const [atpPartnerOnly, setAtpPartnerOnly] = useState(false);
     const [selectedJob, setSelectedJob] = useState<InternJob | null>(null);
     const [showMobileDetails, setShowMobileDetails] = useState(false);
@@ -637,14 +568,11 @@ export default function JobSearch() {
             const matchesFunction = functionFilters.length === 0 || functionFilters.includes(job.function);
             const matchesIndustry = industryFilters.length === 0 || industryFilters.includes(job.industry);
             const matchesJobType = jobTypeFilters.length === 0 || jobTypeFilters.includes(job.jobType);
-            const matchesContract = contractFilter === "" ||
-                (contractFilter === "paid" && job.isPaid) ||
-                (contractFilter === "unpaid" && !job.isPaid);
             const matchesPartner = !atpPartnerOnly || job.isAtpPartner;
 
-            return matchesSearch && matchesLocation && matchesFunction && matchesIndustry && matchesJobType && matchesContract && matchesPartner;
+            return matchesSearch && matchesLocation && matchesFunction && matchesIndustry && matchesJobType && matchesPartner;
         });
-    }, [searchQuery, locationFilters, functionFilters, industryFilters, jobTypeFilters, contractFilter, atpPartnerOnly, jobsVersion]);
+    }, [searchQuery, locationFilters, functionFilters, industryFilters, jobTypeFilters, atpPartnerOnly, jobsVersion]);
 
     const handleJobPosted = (newJob: InternJob) => {
         setJobsVersion(v => v + 1);
@@ -669,11 +597,10 @@ export default function JobSearch() {
         setFunctionFilters([]);
         setIndustryFilters([]);
         setJobTypeFilters([]);
-        setContractFilter("");
         setAtpPartnerOnly(false);
     };
 
-    const hasActiveFilters = searchQuery || locationFilters.length > 0 || functionFilters.length > 0 || industryFilters.length > 0 || jobTypeFilters.length > 0 || contractFilter || atpPartnerOnly;
+    const hasActiveFilters = searchQuery || locationFilters.length > 0 || functionFilters.length > 0 || industryFilters.length > 0 || jobTypeFilters.length > 0 || atpPartnerOnly;
 
     const handleJobSelect = (job: InternJob) => {
         setSelectedJob(job);
@@ -737,12 +664,13 @@ export default function JobSearch() {
 
             <section className="bg-white border-b border-gray-100 py-6">
                 <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 items-start">
-                        <MultiSelectDropdown
-                            label="Location"
-                            options={mockLocations.map(loc => loc.label)}
-                            selected={locationFilters}
-                            onChange={setLocationFilters}
+                    <div className="max-w-5xl mx-auto">
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 items-stretch justify-center">
+                            <MultiSelectDropdown
+                                label="Location"
+                                options={mockLocations.map(loc => loc.label)}
+                                selected={locationFilters}
+                                onChange={setLocationFilters}
                             placeholder="All Locations"
                         />
 
@@ -770,21 +698,9 @@ export default function JobSearch() {
                             placeholder="All Types"
                         />
 
-                        <SingleSelectDropdown
-                            label="Paid / Unpaid"
-                            options={[
-                                { value: "", label: "All" },
-                                { value: "paid", label: "Paid Only" },
-                                { value: "unpaid", label: "Unpaid Only" }
-                            ]}
-                            selected={contractFilter}
-                            onChange={setContractFilter}
-                            placeholder="All"
-                        />
-
                         <div className="space-y-2">
                             <label className="text-sm font-medium text-gray-700">Job Source</label>
-                            <div className="flex items-center gap-3 h-[50px]">
+                            <div className="flex items-center gap-3 min-h-[68px]">
                                 <label className="flex items-center gap-2 cursor-pointer">
                                     <input
                                         type="checkbox"
@@ -794,21 +710,22 @@ export default function JobSearch() {
                                     />
                                     <span className="text-sm text-gray-700">ATP Partner Only</span>
                                 </label>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    {hasActiveFilters && (
-                        <div className="mt-4 flex items-center gap-3">
-                            <button
-                                onClick={resetFilters}
-                                className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium hover:bg-primary/20 transition-colors"
-                            >
-                                <X className="w-3 h-3" />
-                                Reset all filters
-                            </button>
-                        </div>
-                    )}
+                        {hasActiveFilters && (
+                            <div className="mt-4 flex items-center gap-3">
+                                <button
+                                    onClick={resetFilters}
+                                    className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium hover:bg-primary/20 transition-colors"
+                                >
+                                    <X className="w-3 h-3" />
+                                    Reset all filters
+                                </button>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </section>
 
