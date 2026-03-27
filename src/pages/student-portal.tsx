@@ -46,6 +46,8 @@ import PurchaseVideoDialog from "@/components/PurchaseVideoDialog";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { mockProblemTopics, type ProblemTopic } from "@/mocks/data";
+import { mockVideos as studentPortalMockVideos } from "@/data/mockData";
+import { FEATURES } from "@/config/features";
 
 // Mock Assets
 import masterclass1 from "@assets/generated_images/interview_masterclass_thumbnail.png";
@@ -72,7 +74,8 @@ export default function StudentPortal() {
   const [location, setLocation] = useLocation();
   const [activeTab, setActiveTab] = useState<"all" | "curriculum">("curriculum");
   const { member, refreshMember } = useAuth();
-  const userCredits = member?.total_credit || 0;
+  const isPortalDevMode = FEATURES.ENABLE_STUDENT_PORTAL_DEV_MODE;
+  const userCredits = member?.total_credit ?? (isPortalDevMode ? 120 : 0);
   const queryClient = useQueryClient();
   const [checkingPurchase, setCheckingPurchase] = useState(false);
   
@@ -98,12 +101,14 @@ export default function StudentPortal() {
     type: 'full'
   });
 
-  const { data: videosData, isLoading: isLoadingVideos } = useQuery({
+  const { data: videosData, isLoading: isLoadingVideosQuery } = useQuery({
     queryKey: ['videos'],
     queryFn: () => getVideos(),
+    enabled: !isPortalDevMode,
   });
 
-  const allVideos = videosData?.videos || [];
+  const allVideos = isPortalDevMode ? studentPortalMockVideos : (videosData?.videos || []);
+  const isLoadingVideos = isPortalDevMode ? false : isLoadingVideosQuery;
   const fullVideos = allVideos.filter(video => !video.is_short);
   const shortVideos = allVideos.filter(video => video.is_short);
 
@@ -143,6 +148,11 @@ export default function StudentPortal() {
   };
 
   const handleVideoClick = async (video: any, type: 'full' | 'short') => {
+    if (isPortalDevMode) {
+      toast.info('Dev mode: skipping purchase check.');
+      setLocation(createVideoUrl(video, type));
+      return;
+    }
     setCheckingPurchase(true);
     try {
       const purchaseStatus = await checkPurchaseStatus(video.id);
@@ -159,6 +169,12 @@ export default function StudentPortal() {
   };
 
   const handlePurchaseSuccess = () => {
+    if (isPortalDevMode) {
+      if (purchaseDialog.video) {
+        setLocation(createVideoUrl(purchaseDialog.video, purchaseDialog.type));
+      }
+      return;
+    }
     if (purchaseDialog.video) {
       setLocation(createVideoUrl(purchaseDialog.video, purchaseDialog.type));
     }
@@ -210,6 +226,15 @@ export default function StudentPortal() {
         </header>
 
         <div className="p-8 max-w-7xl mx-auto space-y-8">
+          {isPortalDevMode && (
+            <div className="rounded-2xl border border-amber-200 bg-amber-50 px-6 py-4 text-sm text-amber-800 flex items-center gap-3">
+              <BadgeCheck className="w-5 h-5 text-amber-600" />
+              <div>
+                <p className="font-semibold">Student Portal dev mode enabled</p>
+                <p className="text-amber-700">Access granted locally with mock member + videos. Disable via VITE_ENABLE_STUDENT_PORTAL_DEV_MODE env when deploying.</p>
+              </div>
+            </div>
+          )}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
               <h1 className="text-3xl font-serif font-bold text-gray-900 mb-2">

@@ -21,6 +21,8 @@ Create a `.env` file in the root directory:
 ```env
 VITE_API_BASE_URL=http://localhost:8000
 VITE_APP_URL=http://localhost:5000
+VITE_USE_MOCK_DATA=true
+VITE_ENABLE_STUDENT_PORTAL_DEV_MODE=false
 ```
 
 For production:
@@ -190,6 +192,8 @@ Ensure the ATP Laravel backend has:
 ### Development
 - `VITE_API_BASE_URL`: Backend API URL (default: http://localhost:8000)
 - `VITE_APP_URL`: Frontend URL (default: http://localhost:5000)
+- `VITE_USE_MOCK_DATA`: Toggle mock service responses (default: true)
+- `VITE_ENABLE_STUDENT_PORTAL_DEV_MODE`: Bypass auth on `/student-portal` and use mock data locally (default: false)
 
 ### Production
 - `VITE_API_BASE_URL`: https://atp-global.com.au

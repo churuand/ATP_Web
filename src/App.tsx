@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { FEATURES } from "@/config/features";
 import Home from "@/pages/home";
 import Programs from "@/pages/programs";
 import InternshipProgram from "@/pages/internship-program";
@@ -38,6 +39,7 @@ import AboutUs from "@/pages/about-us";
 import BlogArticlePage from "@/pages/blog-article";
 
 function Router() {
+  const isStudentPortalDevMode = FEATURES.ENABLE_STUDENT_PORTAL_DEV_MODE;
   return (
     <Switch>
       {/* Public routes */}
@@ -72,9 +74,13 @@ function Router() {
 
       {/* Protected routes */}
       <Route path="/student-portal">
-        <ProtectedRoute requireStatus="joined">
+        {isStudentPortalDevMode ? (
           <StudentPortal />
-        </ProtectedRoute>
+        ) : (
+          <ProtectedRoute requireStatus="joined">
+            <StudentPortal />
+          </ProtectedRoute>
+        )}
       </Route>
 
       <Route path="/resources">
