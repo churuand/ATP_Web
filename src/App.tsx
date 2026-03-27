@@ -37,6 +37,8 @@ import NotFound from "@/pages/not-found";
 import StudentsGraduates from "@/pages/students-graduates";
 import AboutUs from "@/pages/about-us";
 import BlogArticlePage from "@/pages/blog-article";
+import Recruitment from "@/pages/recruitment";
+import EmployerMatching from "@/pages/employer-matching";
 
 function Router() {
   const isStudentPortalDevMode = FEATURES.ENABLE_STUDENT_PORTAL_DEV_MODE;
@@ -46,13 +48,15 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/job-search" component={JobSearch} />
       <Route path="/internship-program" component={InternshipProgram} />
+      <Route path="/internships" component={InternshipProgram} />
       <Route path="/students-graduates" component={StudentsGraduates} />
       <Route path="/about-us" component={AboutUs} />
       <Route path="/contact-us" component={ContactUs} />
       <Route path="/partners" component={Partners} />
       <Route path="/partners-opportunities" component={PartnersOpportunities} />
+      <Route path="/employer-matching" component={EmployerMatching} />
       <Route path="/success-stories" component={SuccessStories} />
-      <Route path="/recruitment" component={SuccessStories} />
+      <Route path="/recruitment" component={Recruitment} />
       <Route path="/datacap" component={DataCAP} />
       <Route path="/login" component={Login} />
       <Route path="/programs" component={Programs} />
