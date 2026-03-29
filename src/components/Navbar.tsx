@@ -6,7 +6,7 @@ export default function Navbar() {
 
     const navLinks = [
         { href: "/students-graduates", label: "Students & Graduates" },
-        { href: "/employer-matching", label: "Employers" },
+        { href: "/JD-generation", label: "JD generator" },
         { href: "/programs", label: "Programs" },
         { href: "/job-search", label: "Job Board" },
         { href: "/blog", label: "Blog" },
