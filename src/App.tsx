@@ -56,7 +56,7 @@ function Router() {
       <Route path="/partners" component={Partners} />
       <Route path="/partners-opportunities" component={PartnersOpportunities} />
       <Route path="/employer-matching" component={EmployerMatching} />
-      <Route path="/jd-generation" component={JDGeneration} />
+      <Route path="/talent-matching" component={JDGeneration} />
       <Route path="/success-stories" component={SuccessStories} />
       <Route path="/recruitment" component={Recruitment} />
       <Route path="/datacap" component={DataCAP} />
