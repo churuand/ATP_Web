@@ -32,6 +32,7 @@ import Partners from "@/pages/partners";
 import PartnersOpportunities from "@/pages/partners-opportunities";
 import FoundersNetwork from "@/pages/founders-network";
 import SuccessStories from "@/pages/success-stories";
+import Testimonials from "@/pages/testimonials";
 import UploadCV from "@/pages/upload-cv";
 import DataCAP from "@/pages/datacap";
 import NotFound from "@/pages/not-found";
@@ -60,6 +61,7 @@ function Router() {
       <Route path="/employer-matching" component={EmployerMatching} />
       <Route path="/talent-matching" component={JDGeneration} />
       <Route path="/success-stories" component={SuccessStories} />
+      <Route path="/testimonials" component={Testimonials} />
       <Route path="/recruitment" component={Recruitment} />
       <Route path="/datacap" component={DataCAP} />
       <Route path="/login" component={Login} />

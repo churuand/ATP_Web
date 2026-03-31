@@ -9,6 +9,7 @@ export default function Navbar() {
         { href: "/talent-matching", label: "Talent Matching" },
         { href: "/programs", label: "Programs" },
         { href: "/job-search", label: "Job Board" },
+        { href: "/testimonials", label: "Testimonials" },
         { href: "/blog", label: "Blog" },
         { href: "/partners-opportunities", label: "Our Partners" },
         // { href: "/about-us", label: "About Us" },

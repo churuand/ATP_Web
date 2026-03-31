@@ -20,6 +20,8 @@ import {
   Clock,
   ShieldCheck,
   Zap,
+  RefreshCw,
+  MessageCircle,
 } from "lucide-react";
 
 // Mock Assets
@@ -64,8 +66,16 @@ export default function Home() {
                 <span className="w-3 h-3 rounded-full bg-success animate-pulse"></span>
                 Now accepting applications
               </div>
-              <h1 className="text-5xl lg:text-6xl/tight font-serif text-primary">
-                Your career in Australia starts with the right opportunity.
+              <h1 className="text-5xl lg:text-6xl/tight font-serif text-black leading-tight">
+                Study Abroad.
+                <br />
+                Intern in your
+                <br />
+                <span className="text-primary font-semibold transition-all duration-500 ease-in-out hover:tracking-wide">
+                  actual field
+                </span>
+                <br />
+                ATP makes it happen
               </h1>
               <p className="text-lg text-gray-600 leading-relaxed">
                 We help international students turn their studies into
@@ -225,26 +235,16 @@ export default function Home() {
         className="py-24 bg-secondary relative -mt-12 pt-32"
       >
         <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-4xl lg:text-5xl font-serif text-primary mb-6">
-              We help international students secure real internship experience
-              in Australia - step by step.
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <p className="text-sm font-bold text-primary uppercase tracking-widest">
+              Why the market is harder than ever
+            </p>
+            <h2 className="text-4xl lg:text-5xl font-serif text-primary">
+              Fewer internships. More applicants. Cold applying doesn't cut through.
             </h2>
-            <ul className="space-y-3 text-lg font-medium text-gray-700">
-              <li className="flex items-center justify-center gap-2">
-                <span className="w-1.5 h-1.5 bg-primary rounded-full" />
-                We prepare you with Australian-standard resumes and interview
-                coaching
-              </li>
-              <li className="flex items-center justify-center gap-2">
-                <span className="w-1.5 h-1.5 bg-primary rounded-full" />
-                We match you with host companies through our employer network
-              </li>
-              <li className="flex items-center justify-center gap-2">
-                <span className="w-1.5 h-1.5 bg-primary rounded-full" />
-                We support you before, during, and after your internship
-              </li>
-            </ul>
+            <p className="text-lg font-medium text-gray-700">
+              These numbers are from independent global research. This is the environment your classmates are navigating right now.
+            </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -253,16 +253,12 @@ export default function Home() {
               <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 text-[#1f2025] bg-[#caccde]">
                 <Building2 className="w-7 h-7" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Employer Network
-              </h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">109+</h3>
               <div className="text-sm font-bold text-blue-600 mb-4 uppercase tracking-wide">
-                Real companies, real experience
+                Average applications per internship posting in 2024-25
               </div>
               <p className="text-gray-600 leading-relaxed">
-                We place students through our network of host companies across
-                Australia — reducing ghosting and increasing real interview
-                outcomes.
+                Up from 43 just two years ago. Handshake Internship Index 2025 - Global.
               </p>
             </div>
 
@@ -271,15 +267,12 @@ export default function Home() {
               <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 text-[#1f2025] bg-[#caccde]">
                 <FileSearchIcon className="w-7 h-7" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Preparation
-              </h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">-15%</h3>
               <div className="text-sm font-bold text-blue-600 mb-4 uppercase tracking-wide">
-                Prepared for the Australian market
+                Internship postings declined globally since 2023
               </div>
               <p className="text-gray-600 leading-relaxed">
-                Your resume, interview skills, and expectations are tailored to
-                local industry standards before placement.
+                Applications surged while listings fell. Handshake Internship Index 2025 - Global.
               </p>
             </div>
 
@@ -288,17 +281,25 @@ export default function Home() {
               <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 text-[#1f2025] bg-[#caccde]">
                 <Search className="w-7 h-7" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Hidden Opportunities
-              </h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">273</h3>
               <div className="text-sm font-bold text-blue-600 mb-4 uppercase tracking-wide">
-                Opportunities you can’t find online
+                Applications per tech internship posting
               </div>
               <p className="text-gray-600 leading-relaxed">
-                Many of our placements are with companies that don't list
-                positions on public job boards.
+                Financial services average 192; professional services 187. Handshake Internship Index 2025 - Global.
               </p>
             </div>
+          </div>
+
+          <div className="mt-12 bg-gray-900 text-white rounded-3xl p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <p className="text-lg leading-relaxed max-w-3xl">
+              "A warm introduction from a trusted contact gets your CV read by a human. A cold application gets filtered by an algorithm. ATP's network is the difference."
+            </p>
+            <Link href="/students-graduates">
+              <Button className="rounded-full bg-primary text-white hover:bg-primary/90 whitespace-nowrap">
+                How ATP places students
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -330,42 +331,213 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
             <div className="bg-gray-50 rounded-2xl p-8 flex flex-col items-center text-center hover:bg-white hover:shadow-lg transition-all border border-transparent hover:border-gray-100 group">
               <div className="text-4xl font-serif font-bold text-primary mb-3 group-hover:scale-110 transition-transform">
-                10,000+
+                ~100
               </div>
-              <div className="text-sm font-bold text-gray-500">
-                Internship placements completed
+              <div className="text-sm font-bold text-gray-600">
+                Students placed in year one
               </div>
-            </div>
-
-            <div className="bg-gray-50 rounded-2xl p-8 flex flex-col items-center text-center hover:bg-white hover:shadow-lg transition-all border border-transparent hover:border-gray-100 group">
-              <div className="text-4xl font-serif font-bold text-primary mb-3 group-hover:scale-110 transition-transform">
-                &lt; 30 days
-              </div>
-              <div className="text-sm font-bold text-gray-500">
-                Average time from start to placement
+              <div className="text-xs text-gray-400 mt-1">
+                Australia - 2024
               </div>
             </div>
 
             <div className="bg-gray-50 rounded-2xl p-8 flex flex-col items-center text-center hover:bg-white hover:shadow-lg transition-all border border-transparent hover:border-gray-100 group">
               <div className="text-4xl font-serif font-bold text-primary mb-3 group-hover:scale-110 transition-transform">
-                90%+
+                &gt;90%
               </div>
-              <div className="text-sm font-bold text-gray-500">
-                Placement success rate after preparation
+              <div className="text-sm font-bold text-gray-600">
+                Placement success rate
+              </div>
+              <div className="text-xs text-gray-400 mt-1">
+                2024 track record
               </div>
             </div>
 
             <div className="bg-gray-50 rounded-2xl p-8 flex flex-col items-center text-center hover:bg-white hover:shadow-lg transition-all border border-transparent hover:border-gray-100 group">
               <div className="text-4xl font-serif font-bold text-primary mb-3 group-hover:scale-110 transition-transform">
-                100+
+                30
               </div>
-              <div className="text-sm font-bold text-gray-500">
-                Active host companies across Australia
+              <div className="text-sm font-bold text-gray-600">
+                Days to first interview -- guaranteed
+              </div>
+              <div className="text-xs text-gray-400 mt-1">
+                Written in every contract
+              </div>
+            </div>
+
+            <div className="bg-gray-50 rounded-2xl p-8 flex flex-col items-center text-center hover:bg-white hover:shadow-lg transition-all border border-transparent hover:border-gray-100 group">
+              <div className="text-4xl font-serif font-bold text-primary mb-3 group-hover:scale-110 transition-transform">
+                3
+              </div>
+              <div className="text-sm font-bold text-gray-600">
+                Interview opportunities per placement
+              </div>
+              <div className="text-xs text-gray-400 mt-1">
+                Up to 3 sequential attempts
               </div>
             </div>
           </div>
         </div>
       </section>
+      {/* Why ATP Exists */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <p className="text-sm font-bold text-primary uppercase tracking-widest">
+                Why ATP exists
+              </p>
+              <h2 className="text-4xl lg:text-5xl font-serif text-gray-900 leading-tight">
+                Built by someone who's been in <span className="text-primary">exactly your position.</span>
+              </h2>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                Our Founder studied Business at Monash and Hospitality at William Angliss in Melbourne. He landed a Sales intern role at Vodafone Australia and went on to top the team's sales rankings. In 2024 he founded ATP -- because he knew most students never got that same shot, and that even when they did, no one was there to help them succeed once inside.
+              </p>
+              <div className="flex items-center gap-4 bg-rose-50 rounded-2xl p-4">
+                <div className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg">
+                  F
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">Founder · Apex Talent Partners</p>
+                  <p className="text-sm text-gray-600">Monash · William Angliss · Vodafone AU Top Sales · Est. 2024</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gray-900 text-white rounded-[2rem] p-8 shadow-xl">
+              <div className="relative w-full aspect-video rounded-2xl bg-black flex items-center justify-center mb-6">
+                <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center">
+                  <div className="w-0 h-0 border-t-8 border-b-8 border-l-12 border-t-transparent border-b-transparent border-l-white ml-1"></div>
+                </div>
+              </div>
+              <div>
+                <p className="text-lg font-semibold">Hear why our Founder built ATP</p>
+                <p className="text-sm text-white/70">Cựu sinh viên Monash · Top Sales Vodafone Úc</p>
+                <div className="text-xs text-white/60 mt-2">1:30</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* What Makes ATP Different */}
+      <section className="py-24 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <p className="text-sm font-bold text-primary uppercase tracking-widest">
+              What makes ATP different
+            </p>
+            <h2 className="text-4xl lg:text-5xl font-serif text-gray-900">
+              Not just a placement. A warm introduction, full preparation, and support the whole way.
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                title: "Matched to your field",
+                desc: "Only roles aligned to your degree. Business stays in business. Hospitality in hospitality.",
+                icon: <FileSearchIcon className="w-6 h-6" />,
+              },
+              {
+                title: "30-day guarantee",
+                desc: "An interview in your field within 30 days, written into your contract. Refund if we don't deliver.",
+                icon: <Star className="w-6 h-6" />,
+              },
+              {
+                title: "Job Ready Training",
+                desc: "Workplace culture, professional expectations, company-specific briefing before day one.",
+                icon: <GraduationCap className="w-6 h-6" />,
+              },
+              {
+                title: "Support during internship",
+                desc: "Weekly check-ins and on-the-job task support. ATP doesn't disappear once you start.",
+                icon: <RefreshCw className="w-6 h-6" />,
+              },
+              {
+                title: "Pay by milestone",
+                desc: "Instalments tied to what's been delivered. No large upfront cost. Nothing agreed until you're ready.",
+                icon: <MessageCircle className="w-6 h-6" />,
+              },
+              {
+                title: "Personalised, not automated",
+                desc: "Every CV reviewed by a person. ATP recommends the right support level for your situation.",
+                icon: <ShieldCheck className="w-6 h-6" />,
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="bg-white rounded-3xl border border-primary/10 shadow-sm p-6 flex flex-col gap-3"
+              >
+                <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+                  {item.icon}
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
+                <p className="text-sm text-gray-600">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <p className="text-sm font-bold text-primary uppercase tracking-widest">
+              How it works
+            </p>
+            <h2 className="text-4xl lg:text-5xl font-serif text-gray-900">
+              From CV submission to your first day -- and beyond.
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-8">
+            {[
+              {
+                step: "1",
+                title: "Submit CV",
+                desc: "Upload your CV. No commitment at this stage.",
+                meta: "3 minutes - Free",
+              },
+              {
+                step: "2",
+                title: "ATP reviews and consults",
+                desc: "We review your profile and recommend the right support plan.",
+                meta: "Within 48h",
+              },
+              {
+                step: "3",
+                title: "Prep and training",
+                desc: "CV polish, Job Ready Training, interview coaching.",
+                meta: "Before any employer",
+              },
+              {
+                step: "4",
+                title: "Placed and supported",
+                desc: "Warm introduction, offer secured, ongoing support.",
+                meta: "Guaranteed in 30 days",
+              },
+            ].map((item, index) => (
+              <div key={item.step} className="flex flex-col items-start gap-4">
+                <div className="flex items-center gap-4 w-full">
+                  <div className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center text-lg font-bold">
+                    {item.step}
+                  </div>
+                  {index !== 3 && (
+                    <div className="flex-1 h-px bg-gray-200 hidden md:block" />
+                  )}
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-xl font-semibold text-gray-900">{item.title}</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
+                  <p className="text-xs font-semibold text-primary uppercase tracking-widest">{item.meta}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials Section */}
       <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-4">
@@ -449,7 +621,7 @@ export default function Home() {
 
           <div className="text-center">
             <a
-              href="https://atp-global.com.au/testimonials"
+              href="/success-stories"
               target="_blank"
               rel="noopener noreferrer"
             >
