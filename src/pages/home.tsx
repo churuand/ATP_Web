@@ -78,16 +78,15 @@ export default function Home() {
                 ATP makes it happen
               </h1>
               <p className="text-lg text-gray-600 leading-relaxed">
-                We help international students turn their studies into
-                real-world experience through guided internship placements with
-                trusted employers.
+                ATP places international students in field-relevant internships with a warm employer introduction,
+                full preparation, and support throughout. Currently active in Australia, UK, and US.
               </p>
 
               <div className="space-y-4 pt-4">
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-6 h-6 text-primary shrink-0 mt-1" />
                   <p className="text-sm text-gray-600">
-                    Over 10,000 graduates placed in leading companies.
+                    Over 100 graduates placed per year.
                   </p>
                 </div>
                 <div className="flex items-start gap-3">
@@ -147,7 +146,7 @@ export default function Home() {
                       variant="outline"
                       className="rounded-full border-primary/20 text-primary hover:bg-primary/5 px-10 py-5 text-base font-semibold hover:-translate-y-0.5 transition-all w-full sm:w-auto flex items-center gap-2"
                     >
-                      Explore Internship Jobs
+                      Explore Jobs
                       <ArrowRight className="w-4 h-4" />
                     </Button>
                   </Link>
@@ -180,6 +179,25 @@ export default function Home() {
                     >
                       Get Started
                     </Button>
+
+                    <ul className="text-left text-sm lg:text-base text-white/90 space-y-2 mb-10">
+                      <li className="flex gap-2">
+                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-white"></span>
+                        <span>Internship matched to your degree</span>
+                      </li>
+                      <li className="flex gap-2">
+                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-white"></span>
+                        <span>CV prep, interview coaching + training</span>
+                      </li>
+                      <li className="flex gap-2">
+                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-white"></span>
+                        <span>30-day interview guarantee in writing</span>
+                      </li>
+                      <li className="flex gap-2">
+                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-white"></span>
+                        <span>Weekly support during your placement</span>
+                      </li>
+                    </ul>
 
                     <div className="mt-auto w-full aspect-[3/4] relative rounded-t-full overflow-hidden border-4 border-white/10">
                       <img
@@ -214,6 +232,25 @@ export default function Home() {
                     >
                       Get Started
                     </Button>
+
+                    <ul className="text-left text-sm lg:text-base text-primary/80 space-y-2 mb-10">
+                      <li className="flex gap-2">
+                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary/60"></span>
+                        <span>Pre-screened, field-matched candidates</span>
+                      </li>
+                      <li className="flex gap-2">
+                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary/60"></span>
+                        <span>Interns briefed before day one</span>
+                      </li>
+                      <li className="flex gap-2">
+                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary/60"></span>
+                        <span>ATP stays involved throughout</span>
+                      </li>
+                      <li className="flex gap-2">
+                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary/60"></span>
+                        <span>No upfront consulting fees</span>
+                      </li>
+                    </ul>
 
                     <div className="mt-auto w-full aspect-[3/4] relative rounded-t-full overflow-hidden border-4 border-primary/10">
                       <img
@@ -632,6 +669,34 @@ export default function Home() {
                 See more success stories
               </Button>
             </a>
+          </div>
+
+          <div className="mt-16 bg-white rounded-3xl shadow-sm border border-gray-100 p-6">
+            <div className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-4">
+              Where we operate
+            </div>
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              {[
+                { code: "AU", name: "Australia", status: "Active · Est. 2024", badgeClass: "bg-primary/10 text-primary" },
+                { code: "UK", name: "United Kingdom", status: "Testing 2025", badgeClass: "bg-amber-100 text-amber-700" },
+                { code: "US", name: "United States", status: "Testing 2025", badgeClass: "bg-amber-100 text-amber-700" },
+                { code: "CA", name: "Canada", status: "Coming soon", badgeClass: "bg-gray-100 text-gray-500" },
+              ].map((item, index) => (
+                <div
+                  key={item.code}
+                  className={`flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 w-full md:w-auto ${index !== 0 ? "md:border-l md:border-gray-200 md:pl-6" : ""
+                    }`}
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg font-semibold text-gray-900">{item.code}</span>
+                    <span className="text-sm text-gray-600">{item.name}</span>
+                  </div>
+                  <span className={`text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full ${item.badgeClass}`}>
+                    {item.status}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
