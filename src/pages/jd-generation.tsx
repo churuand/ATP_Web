@@ -281,7 +281,7 @@ export default function JDGeneration() {
                       </DialogDescription>
                     </DialogHeader>
                     <div className="mt-6">
-                      <Link href="/programs">
+                      <Link href="/founders-network">
                         <Button className="w-full rounded-full px-10 bg-primary text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-xl">
                           Explore our programs
                         </Button>
