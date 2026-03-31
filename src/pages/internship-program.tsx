@@ -33,7 +33,7 @@ const steps = [
     {
         title: "Application Readiness",
         description:
-            "Tailored resumes, cover letters, and coaching for the Australian market.",
+            "Tailored resumes, cover letters, and coaching for the global market.",
     },
     {
         title: "1:1 HR Mentor Coaching",
@@ -55,7 +55,7 @@ const benefits = [
     },
     {
         title: "Local Insight",
-        desc: "Australian HR mentors translate workplace expectations for you.",
+        desc: "Global HR mentors translate workplace expectations for you.",
         icon: <Users />,
     },
     {
@@ -128,10 +128,10 @@ export default function InternshipProgram() {
                                 Customized Internship Placement
                             </div>
                             <h1 className="text-5xl lg:text-7xl font-serif text-primary mb-8 leading-tight uppercase tracking-tight">
-                                Unlock Your <br /> Australian Career
+                                Unlock Your <br /> global Career
                             </h1>
                             <p className="text-xl text-gray-600 leading-relaxed mb-10">
-                                Guided internship placements that unlock Australian work
+                                Guided internship placements that unlock global work
                                 experience for ambitious international students. We combine
                                 strategic intake, personalised matching, and HR mentor coaching.
                             </p>
@@ -428,7 +428,7 @@ export default function InternshipProgram() {
                     </h2>
                     <div className="h-1 w-20 bg-primary mx-auto mb-6" />
                     <p className="text-lg text-gray-500 mb-12 max-w-3xl mx-auto">
-                        Trusted by leading companies across Australia.
+                        Trusted by leading companies across global.
                     </p>
 
                     <div className="flex flex-wrap justify-center items-center gap-12 lg:gap-16 max-w-5xl mx-auto">

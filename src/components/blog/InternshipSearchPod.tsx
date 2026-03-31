@@ -31,7 +31,7 @@ export function InternshipSearchPod({ className }: InternshipSearchPodProps) {
         asChild
         className="mt-2 w-full rounded-full bg-[#0ca5b0] text-white hover:bg-[#08919b]"
       >
-        <a href="/intern-jobs">Khám phá ngay</a>
+        <a href="/internship-program">Khám phá ngay</a>
       </Button>
     </div>
   );
