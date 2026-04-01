@@ -50,6 +50,15 @@ const afnGroups: FoundersGroup[] = [
         label: "Facebook",
         url: "https://www.facebook.com/groups/1855331925179057"
       },
+      {
+        type: "discord",
+        label: "Discord",
+        url: "https://discord.gg/d2TkGa2Cb"
+      }, {
+        type: "whatsapp",
+        label: "Whatsapp",
+        url: "https://chat.whatsapp.com/H6pz9lh2R8mApE1GobmgVa?mode=gi_t"
+      },
     ],
   },
   {
