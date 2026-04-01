@@ -16,6 +16,8 @@ const upload_cv = () => {
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState("");
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+    const [paidServiceConfirmed, setPaidServiceConfirmed] = useState(false);
+    const [internationalMarketConfirmed, setInternationalMarketConfirmed] = useState(false);
 
     const handleDrop = (event: DragEvent<HTMLLabelElement>) => {
         event.preventDefault();
@@ -41,6 +43,13 @@ const upload_cv = () => {
             setError("Please upload your CV before continuing.");
             return;
         }
+
+        if (!paidServiceConfirmed || !internationalMarketConfirmed) {
+            setError("Please confirm the service details before continuing.");
+            return;
+        }
+
+        setError("");
         setShowFacebookStep(true);
     };
 
@@ -137,9 +146,33 @@ const upload_cv = () => {
                                             Selected file: {cvFile.name}
                                         </p>
                                     )}
-                                    {error && !showFacebookStep && (
-                                        <p className="text-sm text-destructive">{error}</p>
-                                    )}
+                                    <div className="space-y-3 rounded-2xl border border-gray-200 bg-slate-50/80 px-4 py-5">
+                                        <label className="flex items-start gap-3 text-sm text-foreground">
+                                            <input
+                                                type="checkbox"
+                                                checked={paidServiceConfirmed}
+                                                onChange={(event) => setPaidServiceConfirmed(event.target.checked)}
+                                                className="mt-1 h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                                            />
+                                            <span className="font-medium">
+                                                I am aware that this is a paid service
+                                            </span>
+                                        </label>
+                                        <label className="flex items-start gap-3 text-sm text-foreground">
+                                            <input
+                                                type="checkbox"
+                                                checked={internationalMarketConfirmed}
+                                                onChange={(event) => setInternationalMarketConfirmed(event.target.checked)}
+                                                className="mt-1 h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                                            />
+                                            <span className="font-medium">
+                                                This opportunity is for AU/UK students only
+                                            </span>
+                                        </label>
+                                        {error && !showFacebookStep && (
+                                            <p className="text-sm text-destructive">{error}</p>
+                                        )}
+                                    </div>
                                     <div className="flex flex-wrap items-center justify-center gap-4 text-center">
                                         <Button className="rounded-full bg-primary px-8 py-3 text-base font-semibold shadow-xl">
                                             Submit CV
@@ -183,8 +216,8 @@ const upload_cv = () => {
                                         setError("");
                                     }}
                                     className={`flex items-center gap-2 rounded-full border px-4 py-2 transition ${contactMethod === "facebook"
-                                            ? "border-primary bg-primary/20 text-primary"
-                                            : "border-gray-200 text-muted-foreground"
+                                        ? "border-primary bg-primary/20 text-primary"
+                                        : "border-gray-200 text-muted-foreground"
                                         }`}
                                 >
                                     <input
@@ -203,8 +236,8 @@ const upload_cv = () => {
                                         setError("");
                                     }}
                                     className={`flex items-center gap-2 rounded-full border px-4 py-2 transition ${contactMethod === "whatsapp"
-                                            ? "border-primary bg-primary/20 text-primary"
-                                            : "border-gray-200 text-muted-foreground"
+                                        ? "border-primary bg-primary/20 text-primary"
+                                        : "border-gray-200 text-muted-foreground"
                                         }`}
                                 >
                                     <input
