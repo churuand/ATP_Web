@@ -524,7 +524,7 @@ export default function Home() {
               How it works
             </p>
             <h2 className="text-4xl lg:text-5xl font-serif text-gray-900">
-              From CV submission to your first day -- and beyond.
+              From CV submission to your first day and beyond.
             </h2>
           </div>
 
@@ -678,8 +678,8 @@ export default function Home() {
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
               {[
                 { code: "AU", name: "Australia", status: "Active · Est. 2024", badgeClass: "bg-primary/10 text-primary" },
-                { code: "UK", name: "United Kingdom", status: "Testing 2025", badgeClass: "bg-amber-100 text-amber-700" },
-                { code: "US", name: "United States", status: "Testing 2025", badgeClass: "bg-amber-100 text-amber-700" },
+                { code: "UK", name: "United Kingdom", status: "Active · Est. 2025", badgeClass: "bg-primary/10 text-primary" },
+                { code: "US", name: "United States", status: "Active · Est. 2026", badgeClass: "bg-primary/10 text-primary" },
                 { code: "CA", name: "Canada", status: "Coming soon", badgeClass: "bg-gray-100 text-gray-500" },
               ].map((item, index) => (
                 <div
