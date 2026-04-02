@@ -29,6 +29,7 @@ import studentPortrait from "@assets/generated_images/friendly_female_student_po
 import employerPortrait from "@assets/generated_images/friendly_employer_portrait.png";
 import groupImage from "@assets/generated_images/diverse_group_of_graduates.png";
 import atpLogo from "@assets/image_1764912058849.png";
+import founderPortrait from "@assets/generated_images/Hà Ngọc Anh 1.JPG";
 
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
@@ -442,15 +443,27 @@ export default function Home() {
             </div>
 
             <div className="bg-gray-900 text-white rounded-[2rem] p-8 shadow-xl">
-              <div className="relative w-full aspect-video rounded-2xl bg-black flex items-center justify-center mb-6">
-                <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center">
-                  <div className="w-0 h-0 border-t-8 border-b-8 border-l-12 border-t-transparent border-b-transparent border-l-white ml-1"></div>
+              <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden mb-6">
+                <img
+                  src={founderPortrait}
+                  alt="Hà Ngọc Anh, Founder of Apex Talent Partners"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
+                <div className="absolute bottom-4 left-4 flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-primary/90 flex items-center justify-center shadow-lg">
+                    <div className="w-0 h-0 border-t-6 border-b-6 border-l-10 border-t-transparent border-b-transparent border-l-white ml-1"></div>
+                  </div>
+                  <span className="text-sm font-semibold tracking-wide">Play founder story</span>
                 </div>
               </div>
               <div>
-                <p className="text-lg font-semibold">Hear why our Founder built ATP</p>
-                <p className="text-sm text-white/70">Cựu sinh viên Monash · Top Sales Vodafone Úc</p>
-                <div className="text-xs text-white/60 mt-2">1:30</div>
+                <p className="text-lg font-semibold">Hà Ngọc Anh · Founder, Apex Talent Partners</p>
+                <p className="text-sm text-white/70">
+                  Hear why he built ATP to give international students a real pathway into their first industry role.
+                </p>
+                <div className="text-xs text-white/60 mt-2">1:30 video message</div>
               </div>
             </div>
           </div>
