@@ -442,21 +442,24 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="bg-gray-900 text-white rounded-[2rem] p-8 shadow-xl">
-              <div className="flex flex-col items-center text-center gap-5">
-                <div className="relative w-full max-w-[260px] aspect-[3/5] rounded-3xl overflow-hidden border-4 border-white/10 bg-black/40 shadow-2xl mx-auto">
-                  <img
-                    src={founderPortrait}
-                    alt="Eric Ha, Founder of Apex Talent Partners"
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
+            <div className="rounded-[2rem] p-8 shadow-xl bg-gradient-to-br from-rose-50 via-white to-primary/10">
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
+                <div className="w-full md:w-1/2 flex justify-center md:justify-start">
+                  <div className="relative w-full max-w-[240px] aspect-[3/4] rounded-[2rem] overflow-hidden border-4 border-white shadow-xl bg-white">
+                    <img
+                      src={founderPortrait}
+                      alt="Eric Ha, Founder of Apex Talent Partners"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  <p className="text-xl font-semibold">Eric Ha - Founder, Apex Talent Partners</p>
-                  <p className="text-sm text-white/70">
-                    Built ATP to open real pathways for international students into internships and first career roles that match their field.
+                <div className="w-full md:w-1/2 text-center md:text-left space-y-3">
+                  <p className="text-2xl font-semibold text-primary">Eric Ha - Founder, Apex Talent Partners</p>
+                  <p className="text-base text-gray-700">
+                    He built ATP to give international students a warm introduction into internships and full-time roles that match their degree, not just any job.
                   </p>
+                  <p className="text-sm font-semibold text-gray-500">Monash Alum · Vodafone AU Top Sales · Champion for global grads</p>
                 </div>
               </div>
             </div>
