@@ -443,27 +443,21 @@ export default function Home() {
             </div>
 
             <div className="bg-gray-900 text-white rounded-[2rem] p-8 shadow-xl">
-              <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden mb-6">
-                <img
-                  src={founderPortrait}
-                  alt="Hà Ngọc Anh, Founder of Apex Talent Partners"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
-                <div className="absolute bottom-4 left-4 flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-primary/90 flex items-center justify-center shadow-lg">
-                    <div className="w-0 h-0 border-t-6 border-b-6 border-l-10 border-t-transparent border-b-transparent border-l-white ml-1"></div>
-                  </div>
-                  <span className="text-sm font-semibold tracking-wide">Play founder story</span>
+              <div className="flex flex-col items-center text-center gap-5">
+                <div className="relative w-full max-w-[260px] aspect-[3/5] rounded-3xl overflow-hidden border-4 border-white/10 bg-black/40 shadow-2xl mx-auto">
+                  <img
+                    src={founderPortrait}
+                    alt="Eric Ha, Founder of Apex Talent Partners"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
-              </div>
-              <div>
-                <p className="text-lg font-semibold">Hà Ngọc Anh · Founder, Apex Talent Partners</p>
-                <p className="text-sm text-white/70">
-                  Hear why he built ATP to give international students a real pathway into their first industry role.
-                </p>
-                <div className="text-xs text-white/60 mt-2">1:30 video message</div>
+                <div className="space-y-2">
+                  <p className="text-xl font-semibold">Eric Ha - Founder, Apex Talent Partners</p>
+                  <p className="text-sm text-white/70">
+                    Built ATP to open real pathways for international students into internships and first career roles that match their field.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
