@@ -33,7 +33,7 @@ import PartnersOpportunities from "@/pages/partners-opportunities";
 import FoundersNetwork from "@/pages/founders-network";
 import CandidateNetwork from "@/pages/candidate-network";
 import SuccessStories from "@/pages/success-stories";
-import Testimonials from "@/pages/testimonials";
+import Testimonials from "@/pages/success-stories";
 import UploadCV from "@/pages/upload-cv";
 import DataCAP from "@/pages/datacap";
 import NotFound from "@/pages/not-found";
@@ -43,6 +43,7 @@ import BlogArticlePage from "@/pages/blog-article";
 import Recruitment from "@/pages/recruitment";
 import EmployerMatching from "@/pages/employer-matching";
 import JDGeneration from "@/pages/jd-generation";
+import StudentTest from "@/pages/student_test";
 
 function Router() {
   const isStudentPortalDevMode = FEATURES.ENABLE_STUDENT_PORTAL_DEV_MODE;
@@ -56,12 +57,13 @@ function Router() {
       <Route path="/students-graduates" component={StudentsGraduates} />
       <Route path="/about-us" component={AboutUs} />
       <Route path="/contact-us" component={ContactUs} />
-      <Route path="/partners" component={Partners} />
-      <Route path="/partners-opportunities" component={PartnersOpportunities} />
-      <Route path="/founders-network" component={FoundersNetwork} />
-      <Route path="/atp-candidate-network" component={CandidateNetwork} />
+       <Route path="/partners" component={Partners} />
+       <Route path="/partners-opportunities" component={PartnersOpportunities} />
+       <Route path="/atp-founders-network" component={FoundersNetwork} />
+       <Route path="/atp-candidate-network" component={CandidateNetwork} />
       <Route path="/employer-matching" component={EmployerMatching} />
-      <Route path="/talent-matching" component={JDGeneration} />
+       <Route path="/talent-matching" component={JDGeneration} />
+      <Route path="/student_test" component={StudentTest} />
       <Route path="/success-stories" component={SuccessStories} />
       <Route path="/testimonials" component={Testimonials} />
       <Route path="/recruitment" component={Recruitment} />
