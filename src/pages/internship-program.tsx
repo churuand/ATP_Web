@@ -1,99 +1,102 @@
+import { useState, ChangeEvent, FormEvent } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import {
-    ArrowRight,
-    Briefcase,
-    CheckCircle2,
-    ClipboardList,
-    Calendar,
-    Users,
-    Headset,
-    ShieldCheck,
-    Star,
-    Target,
-    FileText,
-    Building2,
-} from "lucide-react";
+import { ArrowRight, CheckCircle2, Check, Upload, Plus, Trash2 } from "lucide-react";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 
+const stats = [
+    {
+        value: "~100",
+        label: "Students placed in year one",
+        helper: "Australia · 2024",
+    },
+    {
+        value: ">90%",
+        label: "Placement success rate",
+        helper: "2024 track record",
+    },
+    {
+        value: "30",
+        label: "Days guaranteed to first interview",
+        helper: "Written in every contract",
+    },
+    {
+        value: "3",
+        label: "Interview opportunities per placement",
+        helper: "Up to 3 attempts",
+    },
+];
+
+const plans = [
+    {
+        name: "Package 1 — Interview Placement",
+        description:
+            "Entry-level, outcome-focused support. Your CV is matched directly to a company’s job description for a fast interview pathway.",
+        features: [
+            "CV matched directly to a specific company’s job description",
+            "1 guaranteed interview opportunity",
+            "No coaching — for candidates confident in their readiness",
+            "Fast-track placement without unnecessary steps",
+            "Pay only when the interview is secured",
+        ],
+        badge: null,
+    },
+    {
+        name: "Package 2 — Career Coaching Session",
+        description:
+            "Low-ticket, trust-building session designed to get clarity. Ideal if you need direction before committing to a placement pathway.",
+        features: [
+            "1-on-1 session with an experienced industry mentor",
+            "Personalized feedback on CV, positioning, and career direction",
+            "Practical advice on running your internship/job search",
+            "Perfect for students unsure about their readiness",
+            "One-time session — no long-term commitment",
+        ],
+        badge: null,
+    },
+    {
+        name: "Package 3 — Placement + Full Support",
+        description:
+            "The flagship experience. Full placement support plus coaching, training, and ongoing accountability so you land — and perform.",
+        features: [
+            "Minimum 3 interview opportunities with partner companies",
+            "5+ coaching sessions covering CV, interview, communication, mindset",
+            "Online application strategy training with Viet",
+            "Networking guidance to unlock hidden opportunities",
+            "Company-specific briefing before each interview",
+            "Ongoing support plus refund guarantee if no interviews secured",
+        ],
+        badge: "Most complete",
+    },
+];
+
 const steps = [
     {
-        title: "Discovery & Priorities",
+        title: "Submit your CV",
         description:
-            "We capture your preferences, fields of interest, desired roles, and career goals.",
+            "Fill in the short form and upload your CV. No commitment at this stage.",
+        meta: "3 minutes · Free · No commitment",
     },
     {
-        title: "Precision Matching",
+        title: "ATP reviews and gets in touch",
         description:
-            "Our team matches you with internships aligned to your skills and direction.",
+            "Our team reviews your profile and contacts you within 48 hours to discuss your goals.",
+        meta: "Within 48 business hours",
     },
     {
-        title: "Application Readiness",
+        title: "CV prep + training",
         description:
-            "Tailored resumes, cover letters, and coaching for the global market.",
+            "HR mentor session, Job Ready Training, interview coaching — before any employer sees you.",
+        meta: "Before any employer introduction",
     },
     {
-        title: "1:1 HR Mentor Coaching",
+        title: "Matched, interviewed, offered — and supported",
         description:
-            "Professional CV reviews, mock interviews, and workplace culture briefings.",
-    },
-    {
-        title: "Placement Support",
-        description:
-            "End-to-end guidance until your internship offer is locked in.",
-    },
-];
-
-const benefits = [
-    {
-        title: "Structured Journey",
-        desc: "Clear timeline balancing your academic needs with employer timelines.",
-        icon: <Calendar />,
-    },
-    {
-        title: "Local Insight",
-        desc: "Global HR mentors translate workplace expectations for you.",
-        icon: <Users />,
-    },
-    {
-        title: "Tangible Outcomes",
-        desc: "We curate opportunities and manage paperwork candidates often miss.",
-        icon: <Target />,
-    },
-    {
-        title: "Accountability",
-        desc: "Dedicated partner from first intake to signed offer.",
-        icon: <ShieldCheck />,
-    },
-];
-
-const deliverables = [
-    {
-        title: "Opportunity Blueprint",
-        description:
-            "Recommendations rooted in your preferences, interests, and career goals.",
-        icon: <ClipboardList />,
-    },
-    {
-        title: "Precision Matching",
-        description:
-            "Internships matched to your trajectory with employer intel.",
-        icon: <Briefcase />,
-    },
-    {
-        title: "Application Toolkit",
-        description:
-            "Resume and cover letter coaching plus review-ready documents.",
-        icon: <FileText />,
-    },
-    {
-        title: "Interview Prep",
-        description:
-            "HR mentors run mock interviews and share cultural cues.",
-        icon: <Headset />,
+            "Warm introduction to a matched employer, interview support, offer confirmed, plus weekly support.",
+        meta: "Guaranteed within 30 days",
     },
 ];
 
@@ -108,11 +111,168 @@ const partnerLogos = [
     "https://atp-global.com.au/images/client-12.png",
 ];
 
+const INTERNSHIP_POSITIONS = [
+    "Accounting & Finance",
+    "Business / Commerce",
+    "Engineering",
+    "Information Technology",
+    "Marketing & Communications",
+    "Hospitality",
+    "Data & Analytics",
+    "Design / UX",
+    "Human Resources",
+    "Supply Chain",
+    "Other",
+];
+
+const SOCIAL_PLATFORMS = ["LinkedIn", "Facebook", "Instagram", "Portfolio / Website", "WhatsApp", "Other"];
+
+const HEAR_OPTIONS = [
+    "Friend or alumni",
+    "University partner",
+    "Social media - LinkedIn",
+    "Social media - Facebook",
+    "Social media - TikTok",
+    "Search engine",
+    "Campus event",
+    "Other",
+];
+
+const PREVIOUS_APPLICATION_OPTIONS = [
+    "No — first time applying",
+    "Yes — applied but no responses",
+    "Yes — had interviews",
+];
+
+type FormFields = {
+    fullName: string;
+    email: string;
+    phone: string;
+    startDate: string;
+    prevApplications: string;
+    howHeard: string;
+    socialPlatform: string;
+    socialLink: string;
+    goal: string;
+    expectations: string;
+    experienceSummary: string;
+};
+
+type EducationEntry = {
+    id: number;
+    school: string;
+    field: string;
+    year: string;
+};
+
+const INITIAL_FORM_VALUES: FormFields = {
+    fullName: "",
+    email: "",
+    phone: "",
+    startDate: "",
+    prevApplications: PREVIOUS_APPLICATION_OPTIONS[0],
+    howHeard: "",
+    socialPlatform: "",
+    socialLink: "",
+    goal: "",
+    expectations: "",
+    experienceSummary: "",
+};
+
 export default function InternshipProgram() {
+    const [formValues, setFormValues] = useState<FormFields>(INITIAL_FORM_VALUES);
+    const [selectedPositions, setSelectedPositions] = useState<string[]>([]);
+    const [otherPosition, setOtherPosition] = useState("");
+    const [hasCV, setHasCV] = useState<"yes" | "no" | null>(null);
+    const [cvFileName, setCvFileName] = useState<string>("");
+    const [cvError, setCvError] = useState<string>("");
+    const [educationEntries, setEducationEntries] = useState<EducationEntry[]>([
+        { id: 1, school: "", field: "", year: "" },
+    ]);
+    const [locationValues, setLocationValues] = useState({
+        country: "",
+        state: "",
+        city: "",
+    });
+    const [hasExperience, setHasExperience] = useState<"yes" | "no" | null>(null);
+
     const fadeIn = {
         initial: { opacity: 0, y: 20 },
         animate: { opacity: 1, y: 0 },
         transition: { duration: 0.6 },
+    };
+
+    const togglePosition = (role: string) => {
+        const alreadySelected = selectedPositions.includes(role);
+        if (alreadySelected) {
+            setSelectedPositions(selectedPositions.filter((item) => item !== role));
+            return;
+        }
+
+        if (selectedPositions.length >= 3) {
+            return;
+        }
+
+        setSelectedPositions([...selectedPositions, role]);
+    };
+
+    const handleEducationChange = (
+        id: number,
+        key: "school" | "field" | "year",
+        value: string,
+    ) => {
+        setEducationEntries((prev) =>
+            prev.map((entry) => (entry.id === id ? { ...entry, [key]: value } : entry)),
+        );
+    };
+
+    const addEducationEntry = () => {
+        setEducationEntries((prev) => [
+            ...prev,
+            { id: Date.now(), school: "", field: "", year: "" },
+        ]);
+    };
+
+    const removeEducationEntry = (id: number) => {
+        setEducationEntries((prev) => prev.filter((entry) => entry.id !== id));
+    };
+
+    const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        setCvError("");
+
+        if (!file) {
+            setCvFileName("");
+            return;
+        }
+
+        if (file.size > 5 * 1024 * 1024) {
+            setCvError("File is larger than 5MB");
+            setCvFileName("");
+            return;
+        }
+
+        const isAccepted = [
+            "application/pdf",
+            "application/msword",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        ].includes(file.type);
+
+        if (!isAccepted) {
+            setCvError("Please upload a PDF or Word document");
+            setCvFileName("");
+            return;
+        }
+
+        setCvFileName(file.name);
+    };
+
+    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+    };
+
+    const updateFormValue = (field: keyof FormFields, value: string) => {
+        setFormValues((prev) => ({ ...prev, [field]: value }));
     };
 
     return (
@@ -136,11 +296,11 @@ export default function InternshipProgram() {
                                 strategic intake, personalised matching, and HR mentor coaching.
                             </p>
                             <div className="flex flex-wrap gap-4">
-                                <Link href="/apply-internship">
+                                <a href="#submit-cv">
                                     <Button className="rounded-full bg-primary text-white hover:bg-primary/90 px-8 py-6 text-lg font-bold shadow-lg shadow-primary/20 transition-all hover:-translate-y-1">
                                         Apply Now <ArrowRight className="ml-2 w-5 h-5" />
                                     </Button>
-                                </Link>
+                                </a>
                                 <Link href="/job-search">
                                     <Button
                                         variant="outline"
@@ -170,155 +330,516 @@ export default function InternshipProgram() {
                 </div>
             </section>
 
-            {/* Key Benefits */}
-            <section className="py-24 bg-secondary/20">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl font-serif text-primary uppercase mb-4">
-                            Why Choose This Program?
-                        </h2>
-                        <div className="h-1 w-20 bg-primary mx-auto" />
-                    </div>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-                        {benefits.map((item, i) => (
-                            <motion.div
-                                key={i}
-                                whileHover={{ y: -5 }}
-                                className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-primary/5"
-                            >
-                                <div className="text-primary mb-6">{item.icon}</div>
-                                <h3 className="text-xl font-bold mb-3 uppercase tracking-tight">
-                                    {item.title}
-                                </h3>
-                                <p className="text-gray-500 text-sm leading-relaxed">
-                                    {item.desc}
-                                </p>
-                            </motion.div>
-                        ))}
-                    </div>
+            {/* Stats */}
+            <section className="bg-white border-y border-gray-100">
+                <div className="container mx-auto px-4 py-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                    {stats.map((stat) => (
+                        <div
+                            key={stat.label}
+                            className="rounded-3xl border border-gray-100 bg-gray-50 p-6 text-center"
+                        >
+                            <div className="text-4xl font-serif text-primary">{stat.value}</div>
+                            <p className="mt-2 text-sm font-semibold text-gray-700">
+                                {stat.label}
+                            </p>
+                            <p className="text-xs text-gray-500 mt-1">{stat.helper}</p>
+                        </div>
+                    ))}
                 </div>
             </section>
 
-            {/* Program Overview */}
-            <section className="py-24 bg-white">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl font-serif text-primary uppercase mb-4">
-                            Program Overview
+            {/* Plans */}
+            <section className="bg-secondary/20 py-20">
+                <div className="container mx-auto px-4 space-y-12">
+                    <div>
+                        <p className="text-xs font-bold uppercase tracking-[0.4em] text-primary">
+                            What ATP does for you
+                        </p>
+                        <h2 className="mt-4 text-3xl sm:text-4xl font-serif text-gray-900">
+                            After reviewing your CV, ATP recommends a support plan tailored to your
+                            situation.
                         </h2>
-                        <div className="h-1 w-20 bg-primary mx-auto mb-6" />
-                        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                            Designed for international students and graduates who need
-                            structured, local guidance.
+                        <p className="mt-2 text-sm text-gray-500">
+                            No prices posted here — ATP reviews every CV personally before
+                            recommending a plan. Pricing is discussed during your free consultation
+                            before anything is agreed.
                         </p>
                     </div>
-                    <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-8">
-                        {[
-                            {
-                                title: "Who This Is For",
-                                text: "International students, visa holders, and recent graduates with little local work experience.",
-                                icon: <Users />,
-                            },
-                            {
-                                title: "Why It Exists",
-                                text: "Employers expect Aussie readiness. We remove the guesswork so you can compete.",
-                                icon: <Target />,
-                            },
-                            {
-                                title: "Problems We Solve",
-                                text: "Lack of local advice, unclear hiring processes, and competing with seasoned candidates.",
-                                icon: <CheckCircle2 />,
-                            },
-                        ].map((item, i) => (
-                            <motion.div
-                                key={i}
-                                whileHover={{ scale: 1.02 }}
-                                className="bg-primary/5 p-8 rounded-[2.5rem] text-center border border-primary/10"
+                    <div className="grid gap-8 lg:grid-cols-3">
+                        {plans.map((plan) => (
+                            <div
+                                key={plan.name}
+                                className={`rounded-3xl border bg-white p-8 shadow-sm ${plan.badge ? "border-primary" : "border-gray-100"}`}
                             >
-                                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mx-auto mb-6">
-                                    {item.icon}
+                                <div className="flex items-center justify-between">
+                                    <h3 className="text-2xl font-serif text-gray-900">{plan.name}</h3>
+                                    {plan.badge && (
+                                        <span className="rounded-full bg-primary/10 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
+                                            {plan.badge}
+                                        </span>
+                                    )}
                                 </div>
-                                <h3 className="text-xl font-bold text-primary mb-4 uppercase">
-                                    {item.title}
-                                </h3>
-                                <p className="text-gray-600 text-sm leading-relaxed">
-                                    {item.text}
-                                </p>
-                            </motion.div>
+                                <p className="mt-4 text-gray-600">{plan.description}</p>
+                                <ul className="mt-6 space-y-3">
+                                    {plan.features.map((feature) => (
+                                        <li
+                                            key={feature}
+                                            className="flex items-start gap-3 text-sm text-gray-700"
+                                        >
+                                            <Check className="h-5 w-5 text-primary" />
+                                            {feature}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* How It Works */}
-            <section className="py-24 bg-secondary/20">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl font-serif text-primary uppercase mb-4">
-                            How The Program Works
-                        </h2>
-                        <div className="h-1 w-20 bg-primary mx-auto mb-6" />
-                        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                            Five structured milestones take you from curiosity to internship
-                            offer.
+            {/* How it works */}
+            <section className="bg-white py-20">
+                <div className="container mx-auto px-4 space-y-12">
+                    <div className="space-y-3">
+                        <p className="text-xs font-semibold uppercase tracking-[0.4em] text-primary">
+                            How it works
                         </p>
+                        <h2 className="text-4xl font-serif text-gray-900">
+                            From CV submission to offer — and we stay with you throughout.
+                        </h2>
                     </div>
-                    <div className="max-w-4xl mx-auto">
-                        <div className="bg-white rounded-[2.5rem] p-8 lg:p-12 shadow-sm border border-primary/5">
-                            {steps.map((step, index) => (
-                                <motion.div
-                                    key={step.title}
-                                    initial="initial"
-                                    animate="animate"
-                                    variants={fadeIn}
-                                    className={`flex gap-6 ${index !== steps.length - 1 ? "pb-8 mb-8 border-b border-gray-100" : ""}`}
-                                >
-                                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary text-white font-bold text-xl">
+                    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+                        {steps.map((step, index) => (
+                            <div key={step.title} className="flex flex-col gap-4">
+                                <div className="flex items-center gap-4">
+                                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white text-lg font-bold">
                                         {index + 1}
                                     </div>
-                                    <div>
-                                        <h3 className="text-xl font-bold uppercase tracking-tight mb-2">
-                                            {step.title}
-                                        </h3>
-                                        <p className="text-gray-500 leading-relaxed">
-                                            {step.description}
-                                        </p>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
+                                    {index !== steps.length - 1 && (
+                                        <div className="hidden flex-1 border-t border-dashed border-gray-300 lg:block" />
+                                    )}
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-semibold text-gray-900">{step.title}</h3>
+                                    <p className="mt-2 text-sm text-gray-600">{step.description}</p>
+                                    <p className="mt-1 text-xs font-semibold uppercase tracking-widest text-primary">
+                                        {step.meta}
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>
 
-            {/* What You Receive */}
-            <section className="py-24 bg-white">
+            {/* Form section */}
+            <section id="submit-cv" className="bg-secondary/10 py-20">
                 <div className="container mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl font-serif text-primary uppercase mb-4">
-                            What You Receive
-                        </h2>
-                        <div className="h-1 w-20 bg-primary mx-auto mb-6" />
-                        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                            Outcome-focused features that turn preparation into placement.
-                        </p>
-                    </div>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-                        {deliverables.map((item, i) => (
-                            <motion.div
-                                key={i}
-                                whileHover={{ y: -5 }}
-                                className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-primary/5"
-                            >
-                                <div className="text-primary mb-6">{item.icon}</div>
-                                <h3 className="text-xl font-bold mb-3 uppercase tracking-tight">
-                                    {item.title}
-                                </h3>
-                                <p className="text-gray-500 text-sm leading-relaxed">
-                                    {item.description}
-                                </p>
-                            </motion.div>
-                        ))}
+                    <div className="rounded-[2rem] bg-white p-8 shadow-sm lg:p-12">
+                        <div className="space-y-2 text-center">
+                            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-primary">
+                                Submit your CV
+                            </p>
+                            <h2 className="text-4xl font-serif text-gray-900">
+                                ATP reviews your profile and recommends the right plan.
+                            </h2>
+                            <p className="text-sm text-gray-500">
+                                No commitment required. ATP responds within 48h. All information is
+                                kept strictly confidential.
+                            </p>
+                        </div>
+                        <form onSubmit={handleSubmit} className="mt-12 space-y-10">
+                            <div className="grid gap-6 md:grid-cols-2">
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-gray-700">Full name *</label>
+                                    <input
+                                        className="w-full rounded-2xl border border-gray-200 bg-gray-50 p-3"
+                                        placeholder="Nguyen Van A"
+                                        value={formValues.fullName}
+                                        onChange={(e) => updateFormValue("fullName", e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-gray-700">Email address *</label>
+                                    <input
+                                        type="email"
+                                        className="w-full rounded-2xl border border-gray-200 bg-gray-50 p-3"
+                                        placeholder="email@gmail.com"
+                                        value={formValues.email}
+                                        onChange={(e) => updateFormValue("email", e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-gray-700">Phone / WhatsApp *</label>
+                                    <input
+                                        className="w-full rounded-2xl border border-gray-200 bg-gray-50 p-3"
+                                        placeholder="+61 or international number"
+                                        value={formValues.phone}
+                                        onChange={(e) => updateFormValue("phone", e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-gray-700">
+                                        Available to start from *
+                                    </label>
+                                    <input
+                                        type="date"
+                                        className="w-full rounded-2xl border border-gray-200 bg-gray-50 p-3"
+                                        value={formValues.startDate}
+                                        onChange={(e) => updateFormValue("startDate", e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-gray-700">Previous applications *</label>
+                                    <select
+                                        className="w-full rounded-2xl border border-gray-200 bg-gray-50 p-3"
+                                        value={formValues.prevApplications}
+                                        onChange={(e) => updateFormValue("prevApplications", e.target.value)}
+                                    >
+                                        {PREVIOUS_APPLICATION_OPTIONS.map((option) => (
+                                            <option key={option}>{option}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-gray-700">Social platform + link</label>
+                                    <div className="flex flex-col gap-3 sm:flex-row">
+                                        <select
+                                            className="w-full rounded-2xl border border-gray-200 bg-gray-50 p-3 sm:w-40"
+                                            value={formValues.socialPlatform}
+                                            onChange={(e) => updateFormValue("socialPlatform", e.target.value)}
+                                        >
+                                            <option value="">Select platform</option>
+                                            {SOCIAL_PLATFORMS.map((platform) => (
+                                                <option key={platform} value={platform}>
+                                                    {platform}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        <input
+                                            className="flex-1 rounded-2xl border border-gray-200 bg-gray-50 p-3"
+                                            placeholder="Link to profile"
+                                            value={formValues.socialLink}
+                                            onChange={(e) => updateFormValue("socialLink", e.target.value)}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="space-y-4">
+                                <div className="flex flex-col gap-2">
+                                    <label className="text-sm font-medium text-gray-700">Desired positions *</label>
+                                    <div className="flex flex-wrap gap-3">
+                                        {INTERNSHIP_POSITIONS.map((role) => {
+                                            const active = selectedPositions.includes(role);
+                                            const disabled = !active && selectedPositions.length >= 3;
+
+                                            return (
+                                                <button
+                                                    type="button"
+                                                    key={role}
+                                                    onClick={() => togglePosition(role)}
+                                                    disabled={disabled}
+                                                    className={`rounded-full border px-4 py-2 text-sm transition ${
+                                                        active
+                                                            ? "border-primary bg-primary text-white"
+                                                            : "border-gray-200 text-gray-700 hover:border-primary/60"
+                                                    } ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                                                >
+                                                    <span className="flex items-center gap-2">
+                                                        {active && <Check className="h-4 w-4" />}
+                                                        {role}
+                                                    </span>
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+                                    <p className="text-xs text-gray-500">Select up to 3 roles that best match your goals.</p>
+                                </div>
+                                {selectedPositions.includes("Other") && (
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-medium text-gray-700">Tell us the role you have in mind</label>
+                                        <input
+                                            className="w-full rounded-2xl border border-gray-200 bg-gray-50 p-3"
+                                            placeholder="e.g. Sustainability consulting"
+                                            value={otherPosition}
+                                            onChange={(e) => setOtherPosition(e.target.value)}
+                                        />
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="space-y-4">
+                                <label className="text-sm font-medium text-gray-700">Do you already have a CV? *</label>
+                                <div className="flex flex-wrap gap-3">
+                                    {["yes", "no"].map((value) => (
+                                        <button
+                                            key={value}
+                                            type="button"
+                                            onClick={() => setHasCV(value as "yes" | "no")}
+                                            className={`rounded-full border px-6 py-2 text-sm uppercase tracking-wide ${
+                                                hasCV === value
+                                                    ? "border-primary bg-primary text-white"
+                                                    : "border-gray-200 text-gray-700 hover:border-primary/60"
+                                            }`}
+                                        >
+                                            {value === "yes" ? "Yes" : "No"}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {hasCV === "yes" && (
+                                <div className="rounded-3xl border-2 border-dashed border-rose-200 bg-rose-50 p-6 text-sm text-gray-600">
+                                    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                                        <div>
+                                            <p className="font-semibold text-gray-900">Upload your CV *</p>
+                                            <p className="mt-1 text-xs text-gray-500">
+                                                PDF or Word · Max 5MB · Give us the latest version
+                                            </p>
+                                            {cvFileName && (
+                                                <p className="mt-2 text-sm text-primary">{cvFileName}</p>
+                                            )}
+                                            {cvError && (
+                                                <p className="mt-2 text-xs text-red-500">{cvError}</p>
+                                            )}
+                                        </div>
+                                        <div className="flex items-center gap-3">
+                                            <input
+                                                type="file"
+                                                id="cv-upload"
+                                                className="hidden"
+                                                accept=".pdf,.doc,.docx"
+                                                onChange={handleFileChange}
+                                            />
+                                            <Button
+                                                type="button"
+                                                variant="outline"
+                                                className="rounded-full border-primary text-primary"
+                                                onClick={() => document.getElementById("cv-upload")?.click()}
+                                            >
+                                                <Upload className="mr-2 h-4 w-4" /> Browse files
+                                            </Button>
+                                            {cvFileName && (
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setCvFileName("")}
+                                                    className="text-xs font-semibold text-gray-500 hover:text-gray-800"
+                                                >
+                                                    Clear
+                                                </button>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {hasCV === "no" && (
+                                <div className="space-y-10">
+                                    <div className="space-y-4">
+                                        <div>
+                                            <p className="text-base font-semibold text-gray-900">Tell us about your background</p>
+                                            <p className="text-sm text-gray-500">
+                                                Fill these fields if you don’t have a CV yet — we’ll capture the essentials manually.
+                                            </p>
+                                        </div>
+                                        <div className="grid gap-6 md:grid-cols-3">
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium text-gray-700">Country *</label>
+                                                <input
+                                                    className="w-full rounded-2xl border border-gray-200 bg-gray-50 p-3"
+                                                    value={locationValues.country}
+                                                    onChange={(e) =>
+                                                        setLocationValues((prev) => ({
+                                                            ...prev,
+                                                            country: e.target.value,
+                                                        }))
+                                                    }
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium text-gray-700">State *</label>
+                                                <input
+                                                    className="w-full rounded-2xl border border-gray-200 bg-gray-50 p-3"
+                                                    value={locationValues.state}
+                                                    onChange={(e) =>
+                                                        setLocationValues((prev) => ({
+                                                            ...prev,
+                                                            state: e.target.value,
+                                                        }))
+                                                    }
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium text-gray-700">City</label>
+                                                <input
+                                                    className="w-full rounded-2xl border border-gray-200 bg-gray-50 p-3"
+                                                    value={locationValues.city}
+                                                    onChange={(e) =>
+                                                        setLocationValues((prev) => ({
+                                                            ...prev,
+                                                            city: e.target.value,
+                                                        }))
+                                                    }
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-4">
+                                        <div className="flex items-center justify-between">
+                                            <div>
+                                                <p className="text-base font-semibold text-gray-900">Education</p>
+                                                <p className="text-sm text-gray-500">Add each degree or program you’re currently in.</p>
+                                            </div>
+                                            <Button type="button" variant="outline" onClick={addEducationEntry} className="rounded-full border-primary text-primary">
+                                                <Plus className="mr-2 h-4 w-4" /> Add education
+                                            </Button>
+                                        </div>
+                                        <div className="space-y-6">
+                                            {educationEntries.map((entry) => (
+                                                <div
+                                                    key={entry.id}
+                                                    className="grid gap-4 rounded-2xl border border-gray-100 p-4 md:grid-cols-12"
+                                                >
+                                                    <div className="md:col-span-5 space-y-2">
+                                                        <label className="text-sm font-medium text-gray-700">University</label>
+                                                        <input
+                                                            className="w-full rounded-2xl border border-gray-200 bg-gray-50 p-3"
+                                                            value={entry.school}
+                                                            onChange={(e) => handleEducationChange(entry.id, "school", e.target.value)}
+                                                        />
+                                                    </div>
+                                                    <div className="md:col-span-5 space-y-2">
+                                                        <label className="text-sm font-medium text-gray-700">Field / Major</label>
+                                                        <input
+                                                            className="w-full rounded-2xl border border-gray-200 bg-gray-50 p-3"
+                                                            value={entry.field}
+                                                            onChange={(e) => handleEducationChange(entry.id, "field", e.target.value)}
+                                                        />
+                                                    </div>
+                                                    <div className="md:col-span-2 space-y-2">
+                                                        <label className="text-sm font-medium text-gray-700">Start year</label>
+                                                        <input
+                                                            className="w-full rounded-2xl border border-gray-200 bg-gray-50 p-3"
+                                                            value={entry.year}
+                                                            onChange={(e) => handleEducationChange(entry.id, "year", e.target.value)}
+                                                        />
+                                                    </div>
+                                                    {educationEntries.length > 1 && (
+                                                        <div className="md:col-span-12 flex justify-end">
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => removeEducationEntry(entry.id)}
+                                                                className="inline-flex items-center gap-1 text-sm font-semibold text-gray-400 hover:text-red-500"
+                                                            >
+                                                                <Trash2 className="h-4 w-4" /> Remove
+                                                            </button>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-4">
+                                        <label className="text-sm font-medium text-gray-700">Do you have prior work experience?</label>
+                                        <div className="flex flex-wrap gap-3">
+                                            {["yes", "no"].map((value) => (
+                                                <button
+                                                    key={value}
+                                                    type="button"
+                                                    onClick={() => setHasExperience(value as "yes" | "no")}
+                                                    className={`rounded-full border px-6 py-2 text-sm uppercase tracking-wide ${
+                                                        hasExperience === value
+                                                            ? "border-primary bg-primary text-white"
+                                                            : "border-gray-200 text-gray-700 hover:border-primary/60"
+                                                    }`}
+                                                >
+                                                    {value === "yes" ? "Yes" : "No"}
+                                                </button>
+                                            ))}
+                                        </div>
+                                        {hasExperience === "yes" && (
+                                            <textarea
+                                                className="w-full rounded-2xl border border-gray-200 bg-gray-50 p-3"
+                                                rows={4}
+                                                placeholder="Share quick bullet points about what you’ve done"
+                                                value={formValues.experienceSummary}
+                                                onChange={(e) => updateFormValue("experienceSummary", e.target.value)}
+                                            />
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+
+                            <div className="grid gap-6 md:grid-cols-2">
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-gray-700">How did you hear about ATP?</label>
+                                    <select
+                                        className="w-full rounded-2xl border border-gray-200 bg-gray-50 p-3"
+                                        value={formValues.howHeard}
+                                        onChange={(e) => updateFormValue("howHeard", e.target.value)}
+                                    >
+                                        <option value="">Select</option>
+                                        {HEAR_OPTIONS.map((option) => (
+                                            <option key={option} value={option}>
+                                                {option}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-gray-700">
+                                        What’s your goal for this internship?
+                                    </label>
+                                    <textarea
+                                        className="w-full rounded-2xl border border-gray-200 bg-gray-50 p-3"
+                                        rows={4}
+                                        placeholder="E.g. I want analytics experience before graduation..."
+                                        value={formValues.goal}
+                                        onChange={(e) => updateFormValue("goal", e.target.value)}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-gray-700">What do you expect from ATP?</label>
+                                <textarea
+                                    className="w-full rounded-2xl border border-gray-200 bg-gray-50 p-3"
+                                    rows={4}
+                                    placeholder="Coaching, introductions, mentor support..."
+                                    value={formValues.expectations}
+                                    onChange={(e) => updateFormValue("expectations", e.target.value)}
+                                />
+                            </div>
+
+                            <div className="rounded-3xl bg-rose-50 p-6 text-sm text-gray-700">
+                                <p className="font-semibold text-gray-900">What happens after you submit:</p>
+                                <ul className="mt-3 space-y-2 text-gray-600">
+                                    <li className="flex items-start gap-2">
+                                        <CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" /> ATP reviews your CV or profile within 48h.
+                                    </li>
+                                    <li className="flex items-start gap-2">
+                                        <CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" /> We contact you to discuss goals, readiness, and the right package.
+                                    </li>
+                                    <li className="flex items-start gap-2">
+                                        <CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" /> You decide after seeing the plan — no commitment until you’re confident.
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <Button className="w-full rounded-full bg-primary py-6 text-lg font-semibold" type="submit">
+                                Submit CV
+                            </Button>
+                            <p className="text-center text-xs text-gray-500">
+                                No commitment at this stage · ATP responds within 48h · All information kept strictly confidential
+                            </p>
+                        </form>
                     </div>
                 </div>
             </section>
