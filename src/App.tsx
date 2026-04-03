@@ -31,6 +31,7 @@ import JobSearch from "@/pages/job-search";
 import Partners from "@/pages/partners";
 import PartnersOpportunities from "@/pages/partners-opportunities";
 import FoundersNetwork from "@/pages/founders-network";
+import CandidateNetwork from "@/pages/candidate-network";
 import SuccessStories from "@/pages/success-stories";
 import Testimonials from "@/pages/testimonials";
 import UploadCV from "@/pages/upload-cv";
@@ -58,6 +59,7 @@ function Router() {
       <Route path="/partners" component={Partners} />
       <Route path="/partners-opportunities" component={PartnersOpportunities} />
       <Route path="/founders-network" component={FoundersNetwork} />
+      <Route path="/atp-candidate-network" component={CandidateNetwork} />
       <Route path="/employer-matching" component={EmployerMatching} />
       <Route path="/talent-matching" component={JDGeneration} />
       <Route path="/success-stories" component={SuccessStories} />
