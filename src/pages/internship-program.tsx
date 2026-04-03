@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, Check, Upload, Plus, Trash2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Check, Upload, Plus, Trash2, Linkedin, Facebook } from "lucide-react";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -144,6 +144,9 @@ const PREVIOUS_APPLICATION_OPTIONS = [
     "Yes — had interviews",
 ];
 
+const CANDIDATE_NETWORK_LINK = "https://www.linkedin.com/groups/19203002/";
+const CANDIDATE_NETWORK_FB_LINK = "https://www.facebook.com/share/g/18WuJgnEMF/";
+
 type FormFields = {
     fullName: string;
     email: string;
@@ -195,6 +198,7 @@ export default function InternshipProgram() {
         city: "",
     });
     const [hasExperience, setHasExperience] = useState<"yes" | "no" | null>(null);
+    const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
     const fadeIn = {
         initial: { opacity: 0, y: 20 },
@@ -269,11 +273,13 @@ export default function InternshipProgram() {
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        setShowSuccessPopup(true);
     };
 
     const updateFormValue = (field: keyof FormFields, value: string) => {
         setFormValues((prev) => ({ ...prev, [field]: value }));
     };
+
 
     return (
         <div className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden">
@@ -999,6 +1005,56 @@ export default function InternshipProgram() {
             </section>
 
             <Footer />
+
+            {showSuccessPopup && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-primary/40 to-amber-400/30 px-4">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{ duration: 0.4 }}
+                        className="w-full max-w-lg rounded-[2.5rem] border border-white/30 bg-white p-8 text-center shadow-[0_30px_80px_rgba(15,23,42,0.25)]"
+                    >
+                        <div className="flex items-center justify-center gap-3 text-sm font-semibold uppercase tracking-[0.5em] text-primary">
+                            <CheckCircle2 className="h-6 w-6" />
+                            <span>Success</span>
+                        </div>
+                        <p className="mt-4 text-2xl font-serif text-slate-900">
+                            Thanks for applying!
+                        </p>
+                        <p className="mt-3 text-base leading-relaxed text-slate-600">
+                            We will reach out within 48 hours. Meanwhile, you can join our ATP Candidate Network for roles, referrals, and interview prep support.
+                        </p>
+                        <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+                            <a
+                                href={CANDIDATE_NETWORK_LINK}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="inline-flex items-center gap-2 rounded-full border border-primary/30 px-6 py-3 text-sm font-semibold text-primary shadow-sm transition hover:bg-primary/10"
+                            >
+                                <Linkedin className="h-4 w-4" />
+                                Join via LinkedIn
+                            </a>
+                            <a
+                                href={CANDIDATE_NETWORK_FB_LINK}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="inline-flex items-center gap-2 rounded-full border border-primary/30 px-6 py-3 text-sm font-semibold text-primary shadow-sm transition hover:bg-primary/10"
+                            >
+                                <Facebook className="h-4 w-4" />
+                                Join via Facebook
+                            </a>
+                        </div>
+                        <button
+                            type="button"
+                            onClick={() => setShowSuccessPopup(false)}
+                            className="mt-4 text-sm font-semibold text-primary underline"
+                        >
+                            Close
+                        </button>
+                    </motion.div>
+                </div>
+            )}
         </div>
     );
 }
