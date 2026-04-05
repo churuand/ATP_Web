@@ -5,7 +5,7 @@ export default function Navbar() {
     const [location] = useLocation();
 
     const navLinks = [
-        { href: "/students-graduates", label: "Students & Graduates" },
+        { href: "/internship-program", label: "Students & Graduates" },
         { href: "/talent-matching", label: "Talent Matching" },
         { href: "/programs", label: "Programs" },
         { href: "/job-search", label: "Job Board" },

@@ -101,7 +101,7 @@ export default function Home() {
 
               {/* CTA Buttons */}
               {/* <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                <Link href="/students-graduates">
+                <Link href="/internship-program">
                   <Button className="rounded-full bg-primary text-white hover:bg-primary/90 px-8 py-6 text-lg font-medium shadow-lg shadow-primary/20 hover:shadow-xl hover:-translate-y-0.5 transition-all w-full sm:w-auto">
                     Apply now!
                   </Button>
@@ -130,7 +130,7 @@ export default function Home() {
                     </Button>
                   </Link>
 
-                  <Link href="internship-program">
+                  <Link href="/internship-program">
                     <Button
                       variant="outline"
                       className="rounded-full border-primary/20 text-primary hover:bg-primary/5 px-8 py-6 text-lg font-medium hover:-translate-y-0.5 transition-all w-full sm:w-auto"
@@ -159,7 +159,7 @@ export default function Home() {
             {/* Right Content - The Arches */}
             <div className="lg:col-span-7 grid md:grid-cols-2 gap-6 relative mt-12 lg:mt-0">
               {/* Student Card */}
-              <Link href="/students-graduates">
+              <Link href="/internship-program">
                 <motion.div
                   className="bg-primary rounded-t-[10rem] rounded-b-[2rem] p-8 text-center text-white relative overflow-hidden group cursor-pointer hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 h-full"
                   initial={{ opacity: 0, y: 40 }}
@@ -333,7 +333,7 @@ export default function Home() {
             <p className="text-lg leading-relaxed max-w-3xl">
               "A warm introduction from a trusted contact gets your CV read by a human. A cold application gets filtered by an algorithm. ATP's network is the difference."
             </p>
-            <Link href="/students-graduates">
+            <Link href="/internship-program">
               <Button className="rounded-full bg-primary text-white hover:bg-primary/90 whitespace-nowrap">
                 How ATP places students
               </Button>
