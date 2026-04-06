@@ -1,4 +1,4 @@
-import { ChangeEvent, DragEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, DragEvent, FormEvent, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 
@@ -6,7 +6,42 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CheckCircle2, CloudUpload, Share2 } from "lucide-react";
+import { type LucideIcon, CheckCircle2, CloudUpload, Facebook, Linkedin, MessageCircle, Share2 } from "lucide-react";
+
+import { acnGroups, ChannelType } from "@/data/acn-groups";
+
+const getChannelUrl = (groupId: string, channelType: ChannelType) => {
+    const group = acnGroups.find((candidateGroup) => candidateGroup.id === groupId);
+    return group?.channels.find((channel) => channel.type === channelType)?.url ?? "";
+};
+
+const joinGroupRows = [
+    { id: "acn-au", badge: "AU", label: "ATP Candidate Network AU" },
+    { id: "acn-uk", badge: "UK", label: "ATP Candidate Network UK" },
+    { id: "acn-us", badge: "US", label: "ATP Candidate Network US" },
+];
+
+type SocialIconLinkProps = {
+    icon: LucideIcon;
+    href?: string;
+    srLabel: string;
+    className?: string;
+};
+
+const SocialIconLink = ({ icon: Icon, href, srLabel, className = "" }: SocialIconLinkProps) => {
+    if (!href) return null;
+    return (
+        <a
+            href={href}
+            target="_blank"
+            rel="noreferrer"
+            className={`inline-flex items-center rounded-full border bg-white px-3 py-2 text-sm transition ${className}`}
+        >
+            <Icon className="h-4 w-4" aria-hidden="true" />
+            <span className="sr-only">{srLabel}</span>
+        </a>
+    );
+};
 
 const upload_cv = () => {
     const [cvFile, setCvFile] = useState<File | null>(null);
@@ -81,12 +116,6 @@ const upload_cv = () => {
         ? "CV submitted. Expect a confirmation within 48 hours."
         : "Drag & drop or browse to upload your CV."
         ;
-
-    useEffect(() => {
-        if (!showSuccessPopup) return;
-        const timer = setTimeout(() => setShowSuccessPopup(false), 5000);
-        return () => clearTimeout(timer);
-    }, [showSuccessPopup]);
 
     return (
         <div className="min-h-screen bg-background text-foreground font-sans">
@@ -276,7 +305,7 @@ const upload_cv = () => {
             )}
 
             {showSuccessPopup && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-primary/40 to-amber-400/30 px-4">
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -289,11 +318,62 @@ const upload_cv = () => {
                             <span>Success</span>
                         </div>
                         <p className="mt-4 text-2xl font-serif text-slate-900">
-                            One more step closer to your true potential!
+                            Thanks for applying!
                         </p>
                         <p className="mt-3 text-base leading-relaxed text-slate-600">
-                            We will reach out to you within 24 hours.
+                            We will reach out within 48 hours. Meanwhile, you can join our ATP Candidate Network for roles, referrals, and interview prep support.
                         </p>
+                        <div className="mt-6 rounded-[1.75rem] border border-primary/20 bg-gradient-to-br from-white to-primary/5 p-5 text-left">
+                            <p className="text-[11px] font-semibold uppercase tracking-[0.4em] text-primary">
+                                Join the ACN groups
+                            </p>
+                            <p className="mt-2 text-sm text-slate-600">
+                                Stay looped in with the Australia, UK, and US networks right away.
+                            </p>
+                            <div className="mt-4 space-y-3">
+                                {joinGroupRows.map((row) => {
+                                    const linkedinUrl = getChannelUrl(row.id, "linkedin");
+                                    const facebookUrl = getChannelUrl(row.id, "facebook");
+                                    const whatsappUrl = getChannelUrl(row.id, "whatsapp");
+                                    if (!linkedinUrl && !facebookUrl && !whatsappUrl) {
+                                        return null;
+                                    }
+                                    return (
+                                        <div
+                                            key={row.id}
+                                            className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/60 bg-white px-4 py-3 shadow-sm"
+                                        >
+                                            <div className="flex items-center gap-3 text-sm font-medium text-slate-700">
+                                                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">
+                                                    {row.badge}
+                                                </span>
+                                                <span>{row.label}</span>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <SocialIconLink
+                                                    icon={Linkedin}
+                                                    href={linkedinUrl}
+                                                    srLabel={`Join ${row.badge} LinkedIn group`}
+                                                    className="border-primary/40 text-[#0A66C2] hover:bg-[#0A66C2]/5"
+                                                />
+                                                <SocialIconLink
+                                                    icon={Facebook}
+                                                    href={facebookUrl}
+                                                    srLabel={`Join ${row.badge} Facebook group`}
+                                                    className="border-primary/40 text-primary hover:bg-primary/5"
+                                                />
+                                                <SocialIconLink
+                                                    icon={MessageCircle}
+                                                    href={whatsappUrl}
+                                                    srLabel={`Join ${row.badge} WhatsApp group`}
+                                                    className="border-emerald-400 text-emerald-500 hover:bg-emerald-50"
+                                                />
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
                         <Button
                             onClick={() => setShowSuccessPopup(false)}
                             className="mt-6 rounded-full bg-primary px-10 py-3 text-base font-semibold text-white shadow-xl"
